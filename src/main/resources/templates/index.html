@@ -16,22 +16,17 @@
     <main>
         <section>
 
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
-            <!-- ALL ARTICLE LIST -->
-            <div>
                 <div>
                     <h2>Title article</h2>
-                    <a>Link to article</a>
+                    <a href="/ajout">Ajouter un article</a>
                 </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
+
+            <div th:each="article : ${articles}">
+                <h2 th:text="${article.title}">Title article</h2>
+                <a th:href="@{'/article/' + ${article.id}}">Lire l'article</a>
             </div>
+
+
         </section>
 
         <section>

@@ -1,13 +1,12 @@
 package com.doranco.coursSpring.controller;
 
+import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ArticleController {
@@ -26,15 +25,26 @@ public class ArticleController {
         model.addAttribute("articles", articles);
         return "index";
     }
-
-    @PostMapping("/article")
-    public String addArticle() {
-        return "index";
+    @GetMapping("/ajout")
+    public String ajout(Model model){
+        model.addAttribute("article", new Article());
+        return "redirect:/article";
     }
 
+    @PostMapping("/article")
+    public String addArticle(@ModelAttribute Article article) {
+
+        articleService.addArticle(article);
+        return "ajout";
+    }
+
+
+
     @GetMapping("/article/{id}")
-    public String getArticle() {
-        return "index";
+    public String getArticle(@PathVariable int id, Model model) {
+        Article article = articleService.getArticle(id);
+        model.addAttribute("article", article);
+        return "redirect:/article";
     }
 
 

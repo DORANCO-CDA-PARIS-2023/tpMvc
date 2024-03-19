@@ -23,6 +23,7 @@ public class Article {
         this.dateTime = LocalDateTime.now();
     }
 
+
     public int getId() {
         return id;
     }
