@@ -1,43 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>TP CSS</title>
-    <link rel="stylesheet" href="/css/styles.css">
+	<meta charset="UTF-8">
+	<title>TP CSS</title>
+	<link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a>Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="/">Home</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section>
+			<div th:if="${articles != null}">
+				<div th:each="article : ${articles}">
+					<h2 th:text="${article.title}">Title article</h2>
+					<a th:if="${article.id != null}" th:href="@{'/article/' + ${article.id}}"
+						th:text="${article.title}">Link to article</a>
+				</div>
+			</div>
+			<div th:if="${articles == null or #lists.isEmpty(articles)}">
+				<p>No articles found.</p>
+			</div>
+		</section>
 
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
-            <!-- ALL ARTICLE LIST -->
-            <div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <!-- ADD ARTICLE  -->
-            <form></form>
-        </section>
-    </main>
+		<section>
+			<!-- ADD ARTICLE  -->
+			<form action="/create" method="post">
+				<!--<p>Id: <input type="text" name="id" /></p>-->
+				<p>Title: <input type="text" name="title" /></p>
+				<p>Message: <input type="text" name="content" /></p>
+				<p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+			</form>
+		</section>
+	</main>
 </body>
+
 </html>

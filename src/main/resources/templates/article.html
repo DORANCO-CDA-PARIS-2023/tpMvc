@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Article Details</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li> <!-- Assuming you want to link back to the home page -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1 th:text="${article.title} ?: 'No Title'">Title article</h1>
+            <!--<a th:if="*{id != null}" th:href="@{'/article/' + *{id}}" th:text="*{title}">Link to article</a>-->
+            <p th:text="${article.content} ?: 'No Content'">Contenu de mon article !</p>
+            <p th:text="${article.author} ?: 'No Author'">Auteur de mon article !</p>
+            <p th:text="${article.dateTime} ?: 'No Date'">Date de mon article !</p>
+            
+            <!--<a th:href="@{'/article/' + ${article.id}}">Edit</a>-->
+            <a th:href="@{'/article/' + ${article.id} + '/delete'}">Delete</a>
+            
+        </section>
+    </main>
+</body>
+
+</html>
