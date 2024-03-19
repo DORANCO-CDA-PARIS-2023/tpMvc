@@ -16,7 +16,7 @@
     <main>
         <section>
 
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
+            <h1>Titre de ma page !</h1>
             <!-- ALL ARTICLE LIST -->
             <div>
                 <div>
@@ -35,8 +35,14 @@
         </section>
 
         <section>
-            <!-- ADD ARTICLE  -->
-            <form></form>
+            <!-- ADD ARTICLE FORM -->
+            <form action="/article" method="post">
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title"><br>
+                <label for="content">Content:</label><br>
+                <textarea id="content" name="content"></textarea><br>
+                <button type="submit">Add Article</button>
+            </form>
         </section>
     </main>
 </body>

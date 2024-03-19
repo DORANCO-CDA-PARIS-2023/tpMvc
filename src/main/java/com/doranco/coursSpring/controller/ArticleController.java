@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import com.doranco.coursSpring.model.entity.Article;
 
 @Controller
 public class ArticleController {
@@ -28,17 +31,21 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public String addArticle() {
-        return "index";
+    public String addArticle(@ModelAttribute Article article) {
+        articleService.addArticle(article);
+        return "redirect:/article";
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle() {
+    public String getArticle(@PathVariable int id, Model model) {
+        Article articleId = this.articleService.getArticlesById(id);
+        model.addAttribute("articleId", articleId);
         return "index";
     }
 
 
-    public String deteteArticle() {
+    public String deleteArticle(@PathVariable int id) {
+        this.articleService.deleteArticle(id);
         return "index";
     }
 
