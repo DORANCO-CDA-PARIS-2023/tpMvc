@@ -31,7 +31,17 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public RedirectView addArticle(@ModelAttribute Article article) {
+    public RedirectView addArticle(@RequestParam("title") String title,
+            @RequestParam("content") String content,
+            @RequestParam("authorFirstName") String authorFirstName,
+            @RequestParam("authorLastName") String authorLastName,
+            @RequestParam("authorEmail") String authorEmail) {
+        User author = new User(authorLastName, authorFirstName, authorEmail);
+        Article article = new Article();
+        article.setTitle(title);
+        article.setContent(content);
+        article.setAuthor(author);
+
         articleService.addArticle(article);
         return new RedirectView("/article");
     }
