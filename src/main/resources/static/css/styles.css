@@ -3,3 +3,42 @@ body {
     padding: 0;
     font-family: Calibri, sans-serif;
 }
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+    background-color: #231b1b;
+    color: whitesmoke;
+}
+
+nav ul {
+    list-style: none;
+}
+
+
+main {
+    width: 80%;
+    margin: auto;
+}
+
+main section div {
+    margin-top: 30px;
+}
+
+main section div article {
+    display: flex;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
