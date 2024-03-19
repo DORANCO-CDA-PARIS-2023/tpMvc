@@ -46,5 +46,12 @@ public class ArticleService {
                 .orElseGet(null);
     }
 
-    public void deleteArticle(int id) {}
+    public Article deleteArticle(int id) {
+        Article article = this.getArticle(id);
+        if (article != null) {
+            this.articles.remove(article);
+        }
+
+        return article;
+    }
 }

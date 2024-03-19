@@ -23,6 +23,7 @@
                 <p th:text="'Posté par ' + ${article.getAuthor().getFirstName()} + ' ' + ${article.getAuthor().getLastName()}">
                     Posté par User Firstname User Lastname
                 </p>
+                <a th:href="'/article/' + ${article.id} + '/delete'">Supprimer</a>
             </footer>
         </article>
     </section>

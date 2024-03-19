@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class ArticleController {
@@ -27,9 +28,9 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public String addArticle(@ModelAttribute Article article) {
+    public RedirectView addArticle(@ModelAttribute Article article) {
         this.articleService.addArticle(article);
-        return "index";
+        return new RedirectView("/article");
     }
 
     @GetMapping("/article/{id}")
@@ -45,9 +46,14 @@ public class ArticleController {
     }
 
 
-    @DeleteMapping("/article/{id}")
-    public String deteteArticle(@PathVariable int id) {
-        return "index";
+    @GetMapping("/article/{id}/delete")
+    public RedirectView deleteArticle(@PathVariable int id) throws NotFoundException {
+        Article deletedArticle = this.articleService.deleteArticle(id);
+        if (deletedArticle == null) {
+            throw new NotFoundException();
+        }
+
+        return new RedirectView("/article");
     }
 
 }
