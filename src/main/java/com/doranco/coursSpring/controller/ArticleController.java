@@ -1,13 +1,16 @@
 package com.doranco.coursSpring.controller;
 
+import com.doranco.coursSpring.exception.NotFoundException;
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
-import org.springframework.http.HttpStatus;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Controller
 public class ArticleController {
@@ -21,9 +24,10 @@ public class ArticleController {
 
 
     @GetMapping("/article")
-    public String listArticles(Model model) {
-        var articles = this.articleService.getArticles();
+    public String listArticles(Model model, HttpSession session) {
+        List<Article> articles = this.articleService.getArticles();
         model.addAttribute("articles", articles);
+        model.addAttribute("login", session.getAttribute("login"));
         return "index";
     }
 
@@ -34,7 +38,7 @@ public class ArticleController {
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle(@PathVariable int id, Model model) throws NotFoundException {
+    public String getArticle(@PathVariable int id, Model model, HttpSession session) throws NotFoundException {
         Article article = articleService.getArticle(id);
 
         if (article == null) {
@@ -42,6 +46,7 @@ public class ArticleController {
         }
 
         model.addAttribute("article", article);
+        model.addAttribute("login", session.getAttribute("login"));
         return "article";
     }
 
@@ -57,6 +62,3 @@ public class ArticleController {
     }
 
 }
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class NotFoundException extends Exception {}

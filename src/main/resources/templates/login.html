@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login</title>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/article">Home</a></li>
+        </ul>
+    </nav>
+    <div>
+        <ul>
+            <li><a href="/user/register">Inscription</a></li>
+            <li><a href="/user/login">Connexion</a></li>
+        </ul>
+    </div>
+</header>
+<main>
+    <section>
+        <form action="/login" method="post">
+            <label for="email">Adresse email</label>
+            <input type="email" name="email" id="email">
+
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+
+            <button type="submit">Connexion</button>
+        </form>
+        <p>
+            Pas encore de compte ? Cliquez <a th:href="@{/user/register}">ici</a> !
+        </p>
+    </section>
+</main>
+</body>
+</html>

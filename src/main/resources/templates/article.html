@@ -13,6 +13,12 @@
             <li><a href="/article">Home</a></li>
         </ul>
     </nav>
+    <div>
+        <ul>
+            <li><a href="/user/register">Inscription</a></li>
+            <li><a href="/user/login">Connexion</a></li>
+        </ul>
+    </div>
 </header>
 <main>
     <section>
@@ -23,7 +29,7 @@
                 <p th:text="'Posté par ' + ${article.getAuthor().getFirstName()} + ' ' + ${article.getAuthor().getLastName()}">
                     Posté par User Firstname User Lastname
                 </p>
-                <a th:href="'/article/' + ${article.id} + '/delete'">Supprimer</a>
+                <a th:if="${login != null && login.getId() == article.getAuthor().getId()}" th:href="'/article/' + ${article.id} + '/delete'">Supprimer</a>
             </footer>
         </article>
     </section>

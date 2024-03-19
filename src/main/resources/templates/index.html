@@ -13,6 +13,12 @@
                 <li><a href="/article">Home</a></li>
             </ul>
         </nav>
+        <div>
+            <ul>
+                <li><a href="/user/register">Inscription</a></li>
+                <li><a href="/user/login">Connexion</a></li>
+            </ul>
+        </div>
     </header>
     <main>
         <section>
@@ -24,7 +30,7 @@
             </div>
         </section>
 
-        <section>
+        <section th:if="${login != null}">
             <!-- ADD ARTICLE  -->
             <form th:action="@{/article}" method="post">
                 <label for="article-title">Entrez le titre de l'article</label>

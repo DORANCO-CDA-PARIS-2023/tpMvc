@@ -22,7 +22,7 @@ public class ArticleService {
                         this.idCount++,
                         "Article de Bob",
                         "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com")
+                        new User("Bob", "Bobby", "bob@bobby.com", "pass")
                 )
         );
     }
