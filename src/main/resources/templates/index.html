@@ -49,7 +49,17 @@
 
         <section>
             <!-- ADD ARTICLE  -->
-            <form></form>
+            <form method="post" action="/article">
+                <div>
+                    <label for="title">Title</label>
+                    <input id="title" type="text" name="title">
+                </div>
+                <div>
+                    <label for="content">content</label>
+                    <textarea id="content" name="content"></textarea>
+                </div>
+                <button type="submit">ajouter</button>
+            </form>
         </section>
     </main>
 </body>
