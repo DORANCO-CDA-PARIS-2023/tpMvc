@@ -1,11 +1,13 @@
 package com.doranco.coursSpring.controller;
 
+import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -22,7 +24,7 @@ public class ArticleController {
 
     @GetMapping("/article")
     public String listArticles(Model model) {
-        var articles = this.articleService.getArticles();
+        var articles = this.articleService.getAllArticles();
         model.addAttribute("articles", articles);
         return "index";
     }
@@ -33,12 +35,15 @@ public class ArticleController {
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle() {
+    public String getArticle(@PathVariable int id, Model model) {
+    	Article articleId = this.articleService.getArticleById(id);
+		model.addAttribute("articleId", articleId);
         return "index";
     }
 
 
-    public String deteteArticle() {
+    public String deleteArticle(@PathVariable int id) {
+    	this.articleService.deleteArticle(id);
         return "index";
     }
 

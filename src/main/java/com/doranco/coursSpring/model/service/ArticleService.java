@@ -24,13 +24,23 @@ public class ArticleService {
         );
     }
 
-    public void addArticle(Article article) {}
+    public void addArticle(Article article) {
+    	articles.add(article);
+    }
 
-    public List<Article> getArticles() {
+    public List<Article> getAllArticles() {
         return this.articles;
     }
 
-    public Article getArticle(int id) {return null; }
+    public Article getArticleById(int id) {
+    	for(Article a : articles) {
+    		if(a.getId() == id) {
+    			return a;
+    		}
+    	}
+    	return null; }
 
-    public void deleteArticle(int id) {}
+    public void deleteArticle(int id) {
+    	articles.remove(this.getArticleById(id));
+    }
 }
