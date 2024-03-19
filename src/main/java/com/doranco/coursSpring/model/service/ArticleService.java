@@ -19,18 +19,21 @@ public class ArticleService {
                         1,
                         "titre1",
                         "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com")
-                )
-        );
+                        new User("Bob", "Bobby", "bob@bobby.com")));
     }
 
-    public void addArticle(Article article) {}
+    public void addArticle(Article article) {
+        articles.add(article);
+    }
 
     public List<Article> getArticles() {
         return this.articles;
     }
 
-    public Article getArticle(int id) {return null; }
+    public Article getArticle(int id) {
+        return null;
+    }
 
-    public void deleteArticle(int id) {}
+    public void deleteArticle(int id) {
+    }
 }

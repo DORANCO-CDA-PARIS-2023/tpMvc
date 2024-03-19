@@ -27,16 +27,33 @@
                     <h2>Title article</h2>
                     <a>Link to article</a>
                 </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
+                
+            </div>
+            <div>
+                <div th:each="article : ${articles}">
+                    <h2 th:text="${article.title}">Title article</h2>
+                    <p th:text="${article.content}">Content</p>
+                    <span th:text="${article.author != null ? article.author.firstName : 'Auteur inconnu'}">Author Name</span>
+                    <span th:text="${article.dateTime}">Date</span>
                 </div>
             </div>
+            
         </section>
 
         <section>
             <!-- ADD ARTICLE  -->
-            <form></form>
+            <form action="#" th:action="@{/article}" th:object="${article}" method="post">
+                <input type="text" name="title" placeholder="Title" />
+                <textarea name="content" placeholder="Content"></textarea>
+                
+                <!-- author part to avoid errors and add some options -->
+                <input type="text" name="authorFirstName" placeholder="Author First Name" />
+                <input type="text" name="authorLastName" placeholder="Author Last Name" />
+                <input type="text" name="authorEmail" placeholder="Author Email" />
+                
+                <button type="submit">Ajouter un article</button>
+            </form>
+            
         </section>
     </main>
 </body>
