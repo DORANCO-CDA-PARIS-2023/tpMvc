@@ -1,14 +1,13 @@
 package com.doranco.coursSpring.controller;
 
-import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class ArticleController {
@@ -34,9 +33,8 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public RedirectView addArticle(@ModelAttribute Article article) {
-        articleService.addArticle(article);
-        return new RedirectView("/article");
+    public String addArticle() {
+        return "index";
     }
 
     @GetMapping("/article/{id}")
