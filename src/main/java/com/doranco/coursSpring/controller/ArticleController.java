@@ -1,24 +1,23 @@
 package com.doranco.coursSpring.controller;
 
+import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.Optional;
 
 @Controller
 public class ArticleController {
 
     private final ArticleService articleService;
 
-    public ArticleController(ArticleService articleService)
-    {
+    public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
     }
-
 
     @GetMapping("/article")
     public String listArticles(Model model) {
@@ -28,21 +27,22 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public String addArticle() {
-        return "index";
+    public RedirectView addArticle(@ModelAttribute Article article) {
+        articleService.addArticle(article);
+        return new RedirectView("/article"); 
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle() {
-        return "index";
+    public String getArticle(@PathVariable int id, Model model){
+        Article article = articleService.getArticle(id);
+        model.addAttribute("article", article);
+        return "article";
     }
 
-
-    public String deteteArticle() {
-        return "index";
+    @GetMapping("/article/{id}/delete")
+    public RedirectView deleteArticle(@PathVariable int id) {
+        articleService.deleteArticle(id);
+        return new RedirectView("/article"); 
     }
 
 }
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class NotFoundException extends Exception {}

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArticleService {
@@ -22,15 +23,54 @@ public class ArticleService {
                         new User("Bob", "Bobby", "bob@bobby.com")
                 )
         );
+        articles.add(
+                new Article(
+                        2,
+                        "titre2",
+                        "blabla2",
+                        new User("Bob", "Bobby", "bob@bobby.com")
+                )
+        );
+        articles.add(
+                new Article(
+                        3,
+                        "titre3",
+                        "blabla3",
+                        new User("Bob", "Bobby", "bob@bobby.com")
+                )
+        );
+    }
+    
+    private int newID(){
+    	int id = 0;
+    	for (var article: articles) {
+    		if (article.getId()> id)
+    			id = article.getId();
+    		}
+    		return id + 1;
     }
 
-    public void addArticle(Article article) {}
+    public void addArticle(Article article) {
+    	if (article.getId() == 0) {
+    		article.setId(newID());    	}
+        	articles.add(article);
+    }
 
     public List<Article> getArticles() {
-        return this.articles;
+        return articles;
     }
 
-    public Article getArticle(int id) {return null; }
+    public Article getArticle(int id) {
+    	for (Article article : articles) {
+    		if (article.getId() == id) {
+    				return article;
+    			}
+    		}
+    	return null;
+    }
 
-    public void deleteArticle(int id) {}
+    public void deleteArticle(int id) {
+    	Article article = getArticle(id);
+        articles.remove(article);
+    }
 }

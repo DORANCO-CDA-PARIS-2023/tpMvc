@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Site Web</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <img src="/img/logo.png" alt="Logo">
+                <img src="img/logo.png" alt="Logo">
             </div>
             <nav>
                 <ul>
@@ -28,41 +28,56 @@
             <h1>Bienvenue sur Mon Site Web</h1>
             <p>Découvrez nos services exceptionnels</p>
         </div>
-        <img src="/img/banner.jpg" alt="accueil Image">
+        <img src="img/banner.jpg" alt="accueil Image">
     </section>
 
     <section id="cards">
         <div class="container">
-    		<div class="card" th:each="article : ${articles}">
-        		<a th:href="@{'/article/' + ${article.id}}">
-            		<h2 th:text="${article.title}"></h2>
-            		<p>Presentation de l'article</p>
-        		</a>
-    		</div>
-        <form method="post" action="/article">
-			<div>
-				<label for="title">Titre</label>
-				<input type="text" name="title">
-			</div>
-			<div>
-				<label for="content">Contenu</label>
-				<textarea name="content"></textarea>
-			<div>
-				
-			<button type="submit">ajouter</buttontype>
-		</form>
+            <div class="card">
+                <a href="#">
+                    <h2>Js</h2>
+                    <p>Prensentation du js</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="#">
+                    <h2>PHP</h2>
+                    <p>Prensentation du php</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="#">
+                    <h2>HTML</h2>
+                    <p>Prensentation du HTML</p>
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card">
+                <a href="#">
+                    <h2>Java</h2>
+                    <p>Prensentation du Java</p>
+                </a>
+            </div>
+            <div class="card">
+                <a href="#">
+                    <h2>C++</h2>
+                    <p>Prensentation du C++</p>
+                </a>
+            </div>
+        </div>
     </section>
 
     <section id="additional-content">
         <div class="container">
-            <img src="/img/image2.webp" alt="Additional Image">
+            <img src="img/image2.webp" alt="Additional Image">
             <p>Image d'exemple de code html</p>
         </div>
     </section>
 
     <section id="presentation">
         <div class="container">
-            <img src="/img/pp.jpg" alt="Profile Image">
+            <img src="img/pp.jpg" alt="Profile Image">
             <div class="presentation-text">
                 <h2>Présentation</h2>
                 <p>Bonjour, je m'appelle Valentin, j'ai 22 ans et je suis un apprentit en informatique devellopeur d'application web en alternance dans l'ecole dorenco.</p>
