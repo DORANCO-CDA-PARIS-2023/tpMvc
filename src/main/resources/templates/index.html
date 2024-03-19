@@ -4,39 +4,49 @@
     <meta charset="UTF-8">
     <title>TP CSS</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a>Home</a></li>
+                <li><a href="/article">Home</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section>
-
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
-            <!-- ALL ARTICLE LIST -->
-            <div>
+            <div th:each="article : ${articles}">
                 <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
+                    <h2 th:text="${article.title}">Title article</h2>
+                    <a th:href="@{/article/{id}(id=${article.id})}">Link to article</a>
                 </div>
             </div>
         </section>
 
         <section>
             <!-- ADD ARTICLE  -->
-            <form></form>
+            <form th:action="@{/article}" method="post">
+                <label for="article-title">Entrez le titre de l'article</label>
+                <input id="article-title" type="text" name="title">
+
+                <label for="article-content">Entrez le contenu de l'article</label>
+                <textarea id="article-content" placeholder="Entrez le contenu de l'article ici." rows="10" cols="100" name="content"></textarea>
+
+                <label for="article-user-firstname">Entrez votre prénom</label>
+                <input id="article-user-firstname" type="text" name="author.firstName">
+
+                <label for="article-user-lastname">Entrez votre nom</label>
+                <input id="article-user-lastname" type="text" name="author.lastName">
+
+                <label for="article-user-email">Entrez votre email</label>
+                <input id="article-user-email" type="email" name="author.email">
+
+                <div>
+                    <button type="reset">Effacer</button>
+                    <button type="submit">Ajouter</button>
+                </div>
+            </form>
         </section>
     </main>
 </body>

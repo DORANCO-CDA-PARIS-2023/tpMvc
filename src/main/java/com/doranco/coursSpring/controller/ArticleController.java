@@ -1,13 +1,12 @@
 package com.doranco.coursSpring.controller;
 
+import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ArticleController {
@@ -28,17 +27,31 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public String addArticle() {
+    public String addArticle(@ModelAttribute Article article) {
+        this.articleService.addArticle(article);
+        System.out.println(article.toString());
         return "index";
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle() {
-        return "index";
+    public String getArticle(@PathVariable int id, Model model) throws NotFoundException {
+        Article article = articleService.getArticles()
+                .stream()
+                .filter(a -> a.getId() == id)
+                .findFirst()
+                .orElseGet(null);
+
+        if (article == null) {
+            throw new NotFoundException();
+        }
+
+        model.addAttribute("article", article);
+        return "article";
     }
 
 
-    public String deteteArticle() {
+    @DeleteMapping("/article/{id}")
+    public String deteteArticle(@PathVariable int id) {
         return "index";
     }
 

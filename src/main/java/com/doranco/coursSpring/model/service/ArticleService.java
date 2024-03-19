@@ -11,20 +11,27 @@ import java.util.List;
 public class ArticleService {
 
     private final List<Article> articles;
+    private int idCount;
 
     public ArticleService() {
+        this.idCount = 1;
         articles = new ArrayList<>();
         articles.add(
                 new Article(
-                        1,
-                        "titre1",
+                        this.idCount++,
+                        "Article de Bob",
                         "blabla",
                         new User("Bob", "Bobby", "bob@bobby.com")
                 )
         );
     }
 
-    public void addArticle(Article article) {}
+    public int addArticle(Article article) {
+        article.setId(this.idCount++);
+        this.articles.add(article);
+
+        return article.getId();
+    }
 
     public List<Article> getArticles() {
         return this.articles;

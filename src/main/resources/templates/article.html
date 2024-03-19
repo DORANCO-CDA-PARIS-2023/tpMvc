@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article</title>
+    <link rel="stylesheet" href="/css/article.css">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/article">Home</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <article>
+            <h1 th:text="${article.title}">Article Titre</h1>
+            <p th:text="${article.content}">Article Contenu</p>
+            <footer>
+                <p th:text="'Posté par ' + ${article.getAuthor().getFirstName()} + ' ' + ${article.getAuthor().getLastName()}">
+                    Posté par User Firstname User Lastname
+                </p>
+            </footer>
+        </article>
+    </section>
+</main>
+</body>
+</html>
