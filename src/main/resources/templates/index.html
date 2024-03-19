@@ -2,42 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TP CSS</title>
+    <title>Cours SPRING</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a>Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
+<header>
+    <nav>
+        <ul>
+            <li><a>Home</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <!-- ALL ARTICLE LIST -->
+        <div>
+            <article th:each="article: ${articles}">
+                <h2 th:text="${article.title}">Title article</h2>
+                <a th:href="@{'/article/' + ${article.id} }">Link to article</a>
+            </article>
+        </div>
+    </section>
 
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
-            <!-- ALL ARTICLE LIST -->
+    <section>
+        <!-- ADD ARTICLE  -->
+        <form method="post" action="/article">
             <div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
+                <label for="title">Title</label>
+                <input id="title" type="text" name="title">
             </div>
-        </section>
-
-        <section>
-            <!-- ADD ARTICLE  -->
-            <form></form>
-        </section>
-    </main>
+            <div>
+                <label for="content">content</label>
+                <textarea id="content" name="content"></textarea>
+            </div>
+            <button type="submit">ajouter</button>
+        </form>
+    </section>
+</main>
 </body>
 </html>
