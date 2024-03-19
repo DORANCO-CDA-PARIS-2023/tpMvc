@@ -27,20 +27,20 @@
                     <td th:text="${article.author}">Text ...</td>
                 </tr>
             </form>
-            <div>
 
-                <form method="post" th:action="@{/add article}" th:object="${article1}" th:object="${user}">
-                    <input id="firstName" placeholder="Enter First Name" required type="text"
-                           th:field="*{user.firstName}"/>
+
+
+               <!-- <form method="post" th:action="@{/article}" th:object="${user}">
+                    <input id="firstName" placeholder="Enter First Name" required type="text" th:field="*{user.firstName}"/>
                     <input id="lastName" placeholder="Enter Last Name" required type="text"
                            th:field="*{user.lastName}"/>
-                    <input type="submit" value="Create User" th:field="*{article1.author}"/>
-                    <input id="id" placeholder="enter id" required type="text" th:field="*{article1.id}"/>
-                    <input id="title" placeholder="enter title" required type="text" th:field="*{article1.title}"/>
-                    <input type="submit" value="Create article1">
+                    <input type="submit" value="Create User" th:field="*{article.author}"/> </form>-->
+                <!--    <form method="post" th:action="@{/article}" th:object="${article}">
+                    <input id="id" placeholder="enter id" required type="text" th:field="*{article.id}"/>
+                    <input id="title" placeholder="enter title" required type="text" th:field="*{article.title}"/>
+                    <input type="submit" value="Create article">
 
-            </div>
-            </form>
+                    </form>-->
 
 
         </section>
