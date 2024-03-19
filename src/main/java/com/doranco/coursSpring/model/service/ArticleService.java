@@ -2,6 +2,7 @@ package com.doranco.coursSpring.model.service;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.entity.User;
+import jakarta.annotation.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,7 +38,13 @@ public class ArticleService {
         return this.articles;
     }
 
-    public Article getArticle(int id) {return null; }
+    public @Nullable Article getArticle(int id) {
+        return this.articles
+                .stream()
+                .filter(a -> a.getId() == id)
+                .findFirst()
+                .orElseGet(null);
+    }
 
     public void deleteArticle(int id) {}
 }

@@ -29,17 +29,12 @@ public class ArticleController {
     @PostMapping("/article")
     public String addArticle(@ModelAttribute Article article) {
         this.articleService.addArticle(article);
-        System.out.println(article.toString());
         return "index";
     }
 
     @GetMapping("/article/{id}")
     public String getArticle(@PathVariable int id, Model model) throws NotFoundException {
-        Article article = articleService.getArticles()
-                .stream()
-                .filter(a -> a.getId() == id)
-                .findFirst()
-                .orElseGet(null);
+        Article article = articleService.getArticle(id);
 
         if (article == null) {
             throw new NotFoundException();

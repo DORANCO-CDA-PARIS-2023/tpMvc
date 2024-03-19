@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Article</title>
+    <title th:text="'Article | ' + ${article.getTitle()}">Article</title>
     <link rel="stylesheet" href="/css/article.css">
     <link rel="stylesheet" href="/css/header.css">
 </head>
