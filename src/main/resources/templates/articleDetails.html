@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TP CSS</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a>Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+
+            <!-- <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1> -->
+            <h1>Article Details</h1>
+
+            <div>
+                <h2 data-th-text="${article.title}">Titre de l'article</h2>
+                <p data-th-text="${article.content}">Contenu de l'article ici</p>
+                <p><strong>Author:</strong> <span data-th-text="${article.author}">Nom de l'auteur</span></p>
+                <p><strong>Date:</strong> <span data-th-text="${article.date}">Date de publication</span></p>
+            </div>
+
+        </section>
+
+        <section>
+            <!-- ADD ARTICLE  -->
+            <form></form>
+        </section>
+    </main>
+</body>
+
+</html>
