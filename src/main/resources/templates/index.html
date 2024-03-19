@@ -16,8 +16,7 @@
     <main>
         <section>
 
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
-            <!-- ALL ARTICLE LIST -->
+            <h1>Tous les articles</h1>
             <div>
                 <div>
                     <h2>Title article</h2>
@@ -36,9 +35,10 @@
 
         <section class="formdiv">
             <h1>Form</h1>
-            <form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+            <form action="#" th:action="@{/article}" th:object="${article}" method="post">
                 <p>Id: <input type="text" th:field="*{id}" /></p>
-                <p>Message: <input type="text" th:field="*{content}" /></p>
+                <p>Title: <input type="text" th:field="*{title}" /></p>
+                 <p>Content: <input type="text" th:field="*{content}" /></p>
                 <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
             </form>        
         </section>
