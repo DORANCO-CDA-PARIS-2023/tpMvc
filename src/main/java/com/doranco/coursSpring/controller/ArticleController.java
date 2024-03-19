@@ -1,13 +1,13 @@
 package com.doranco.coursSpring.controller;
 
+import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.doranco.coursSpring.model.entity.Article;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,24 +31,22 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public String addArticle(Article article,
-            @RequestParam String authorFirstName, // to add all the author's params
-            @RequestParam String authorLastName,
-            @RequestParam String authorEmail,
-            Model model) {
-        User author = new User(authorLastName, authorFirstName, authorEmail);
-        article.setAuthor(author); // we associate the author with the article
+    public RedirectView addArticle(@ModelAttribute Article article) {
         articleService.addArticle(article);
-        return "redirect:/article";
+        return new RedirectView("/article");
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle() {
-        return "index";
+    public String getArticle(@PathVariable int id, Model model) {
+        Article article = articleService.getArticle(id);
+        model.addAttribute("article", article);
+        return "article";
     }
 
-    public String deteteArticle() {
-        return "index";
+    @GetMapping("/article/{id}/delete")
+    public RedirectView deteteArticle(@PathVariable int id) {
+        articleService.deleteArticle(id);
+        return new RedirectView("/article");
     }
 
 }

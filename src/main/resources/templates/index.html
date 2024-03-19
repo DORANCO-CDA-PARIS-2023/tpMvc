@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TP CSS</title>
+    <title>Cours SPRING</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -15,45 +15,29 @@
     </header>
     <main>
         <section>
-
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
-            <!-- ALL ARTICLE LIST test-->
+            <!-- ALL ARTICLE LIST -->
             <div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                
-            </div>
-            <div>
-                <div th:each="article : ${articles}">
+                <article th:each="article: ${articles}">
                     <h2 th:text="${article.title}">Title article</h2>
-                    <p th:text="${article.content}">Content</p>
-                    <span th:text="${article.author != null ? article.author.firstName : 'Auteur inconnu'}">Author Name</span>
-                    <span th:text="${article.dateTime}">Date</span>
-                </div>
+                    <a th:href="@{'/article/' + ${article.id} }">Link to article</a>
+                </article>
             </div>
             
         </section>
 
         <section>
             <!-- ADD ARTICLE  -->
-            <form action="#" th:action="@{/article}" th:object="${article}" method="post">
-                <input type="text" name="title" placeholder="Title" />
-                <textarea name="content" placeholder="Content"></textarea>
-                
-                <!-- author part to avoid errors and add some options -->
-                <input type="text" name="authorFirstName" placeholder="Author First Name" />
-                <input type="text" name="authorLastName" placeholder="Author Last Name" />
-                <input type="text" name="authorEmail" placeholder="Author Email" />
-                
-                <button type="submit">Ajouter un article</button>
+            <form method="post" action="/article">
+                <div>
+                    <label for="title">Title</label>
+                    <input id="title" type="text" name="title">
+                </div>
+                <div>
+                    <label for="content">content</label>
+                    <textarea id="content" name="content"></textarea>
+                </div>
+                <button type="submit">ajouter</button>
             </form>
-            
         </section>
     </main>
 </body>
