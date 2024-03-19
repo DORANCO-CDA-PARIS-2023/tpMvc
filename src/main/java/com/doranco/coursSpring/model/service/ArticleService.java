@@ -24,7 +24,11 @@ public class ArticleService {
         );
     }
 
-    public void addArticle(Article article) {}
+    public void addArticle(Article article) {
+        int newId = articles.size() + 1;
+        article.setId(newId);
+        articles.add(article);
+    }
 
     public List<Article> getArticles() {
         return this.articles;

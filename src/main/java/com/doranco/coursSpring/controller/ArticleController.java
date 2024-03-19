@@ -1,6 +1,6 @@
 package com.doranco.coursSpring.controller;
-
 import com.doranco.coursSpring.model.service.ArticleService;
+import com.doranco.coursSpring.model.entity.Article;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
@@ -19,17 +19,16 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-
     @GetMapping("/article")
-    public String listArticles(Model model) {
-        var articles = this.articleService.getArticles();
-        model.addAttribute("articles", articles);
+    public String getIndex(Model model) {
+        model.addAttribute("articles", articleService.getArticles());
         return "index";
     }
 
-    @PostMapping("/article")
-    public String addArticle() {
-        return "index";
+    @PostMapping("/ajout")
+    public String addArticle(Article article) {
+        articleService.addArticle(article);
+        return "redirect:/article";
     }
 
     @GetMapping("/article/{id}")
