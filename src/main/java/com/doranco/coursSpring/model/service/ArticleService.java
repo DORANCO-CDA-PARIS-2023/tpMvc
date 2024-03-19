@@ -19,18 +19,49 @@ public class ArticleService {
                         1,
                         "titre1",
                         "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com")
+                        new User(1,"Bob", "Bobby", "bob@bobby.com")
                 )
         );
+
     }
 
-    public void addArticle(Article article) {}
-
-    public List<Article> getArticles() {
-        return this.articles;
+    private int newID()
+    {
+        int id = 0;
+        for (var article: articles)
+        {
+            if (article.getId() > id)
+                id = article.getId();
+        }
+        return id + 1;
     }
 
-    public Article getArticle(int id) {return null; }
+    public void addArticle(Article article)
+    {
+        if (article.getId() == 0) {
+            article.setId(newID());
+        }
+        articles.add(article);
+    }
 
-    public void deleteArticle(int id) {}
+    public List<Article> getArticles()
+    {
+        return articles;
+    }
+
+    public Article getArticle(int id)
+    {
+        for (Article article : articles)
+        {
+            if (article.getId() == id)
+                return article;
+        }
+        return null;
+    }
+
+    public void deleteArticle(int id)
+    {
+        Article article = getArticle(id);
+        articles.remove(article);
+    }
 }
