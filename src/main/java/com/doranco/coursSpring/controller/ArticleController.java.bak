@@ -1,0 +1,72 @@
+package com.doranco.coursSpring.controller;
+
+import com.doranco.coursSpring.model.entity.Article;
+<<<<<<< HEAD
+=======
+import com.doranco.coursSpring.model.entity.User;
+>>>>>>> 43bdeb1485640fa613e1141783daaab204ec40c7
+import com.doranco.coursSpring.model.service.ArticleService;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
+<<<<<<< HEAD
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+>>>>>>> 43bdeb1485640fa613e1141783daaab204ec40c7
+
+@Controller
+public class ArticleController {
+
+    private final ArticleService articleService;
+
+    public ArticleController(ArticleService articleService)
+    {
+        this.articleService = articleService;
+    }
+
+
+    @GetMapping("/article")
+    public String listArticles(Model model) {
+        var articles = this.articleService.getArticles();
+        model.addAttribute("articles", articles);
+        return "index";
+    }
+
+<<<<<<< HEAD
+    @PostMapping("/article")
+    public RedirectView addArticle(@ModelAttribute Article article) {
+        articleService.addArticle(article);
+        return new RedirectView("/article");
+=======
+    @PostMapping("/add article")
+    public String addArticle(Model model,@ModelAttribute Article article) {
+        Article article1 = (Article) articleService.addArticle(article);
+
+        return "index";
+>>>>>>> 43bdeb1485640fa613e1141783daaab204ec40c7
+    }
+
+    @GetMapping("/article/{id}")
+    public String getArticle(@PathVariable int id, Model model) {
+        Article article = articleService.getArticle(id);
+        model.addAttribute("article", article);
+        return "article";
+    }
+
+
+    @GetMapping("/article/{id}/delete")
+    public RedirectView deteteArticle(@PathVariable int id) {
+        articleService.deleteArticle(id);
+        return new RedirectView("/article");
+    }
+
+}
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+class NotFoundException extends Exception {}
