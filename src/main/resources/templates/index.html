@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TP CSS</title>
+    <title>Article CRUD Spring MVC</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -16,22 +16,33 @@
     <main>
         <section>
 
-            <h1 data-th-text="${articles[0].title}">Titre de ma page !</h1>
-            <!-- ALL ARTICLE LIST -->
+            <!--/*@thymesVar id="article" type="jakarta"*/-->
+            <form method="get" th:object="${articles}" th:action="@{/article}">
+                <label>
+                    List:
+                </label>
+                <tr th:each="article : ${articles}">
+                    <td th:text="${article.id}">1</td>
+                    <td><a href="#" th:text="${article.title}">Title ...</a></td>
+                    <td th:text="${article.author}">Text ...</td>
+                </tr>
+            </form>
             <div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
-                <div>
-                    <h2>Title article</h2>
-                    <a>Link to article</a>
-                </div>
+
+                <form method="post" th:action="@{/add article}" th:object="${article1}" th:object="${user}">
+                    <input id="firstName" placeholder="Enter First Name" required type="text"
+                           th:field="*{user.firstName}"/>
+                    <input id="lastName" placeholder="Enter Last Name" required type="text"
+                           th:field="*{user.lastName}"/>
+                    <input type="submit" value="Create User" th:field="*{article1.author}"/>
+                    <input id="id" placeholder="enter id" required type="text" th:field="*{article1.id}"/>
+                    <input id="title" placeholder="enter title" required type="text" th:field="*{article1.title}"/>
+                    <input type="submit" value="Create article1">
+
             </div>
+            </form>
+
+
         </section>
 
         <section>

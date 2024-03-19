@@ -24,7 +24,9 @@ public class ArticleService {
         );
     }
 
-    public void addArticle(Article article) {}
+    public Object addArticle(Article article) {
+        return null;
+    }
 
     public List<Article> getArticles() {
         return this.articles;
