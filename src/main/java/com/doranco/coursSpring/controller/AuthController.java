@@ -1,5 +1,6 @@
 package com.doranco.coursSpring.controller;
 
+import com.doranco.coursSpring.exception.ConflictException;
 import com.doranco.coursSpring.exception.NotFoundException;
 import com.doranco.coursSpring.exception.UnauthorizedException;
 import com.doranco.coursSpring.model.entity.User;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Optional;
+
 @Controller
 public class AuthController {
 
@@ -21,8 +24,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public RedirectView register() {
-        return new RedirectView("/login");
+    public RedirectView register(@ModelAttribute User user) throws ConflictException {
+        Optional<User> userByEmail = userService.getUserByEmail(user.getEmail());
+        if (userByEmail.isPresent()) {
+            throw new ConflictException();
+        }
+
+        userService.addUser(user);
+        return new RedirectView("/user/login");
     }
 
     @PostMapping("/login")
@@ -35,22 +44,23 @@ public class AuthController {
             throw new UnauthorizedException();
         }
 
-        User userByEmail = this.userService.getUserByEmail(user.getEmail());
-        if (userByEmail == null) {
+        Optional<User> userByEmail = this.userService.getUserByEmail(user.getEmail());
+        if (userByEmail.isEmpty()) {
             throw new NotFoundException();
         }
 
-        if (!user.getPassword().equals(userByEmail.getPassword())) {
+        if (!user.getPassword().equals(userByEmail.get().getPassword())) {
             throw new UnauthorizedException();
         }
 
-        session.setAttribute("login", userByEmail);
+        session.setAttribute("login", userByEmail.get());
         return new RedirectView("/article");
     }
 
     @GetMapping("/logout")
-    public RedirectView logout() {
-        return new RedirectView("/login");
+    public RedirectView logout(HttpSession session) {
+        session.removeAttribute("login");
+        return new RedirectView("/user/login");
     }
 
 }

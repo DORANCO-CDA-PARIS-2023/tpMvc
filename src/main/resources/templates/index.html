@@ -15,8 +15,9 @@
         </nav>
         <div>
             <ul>
-                <li><a href="/user/register">Inscription</a></li>
-                <li><a href="/user/login">Connexion</a></li>
+                <li th:if="${login == null}"><a href="/user/register">Inscription</a></li>
+                <li th:if="${login == null}"><a href="/user/login">Connexion</a></li>
+                <li th:if="${login != null}"><a href="/logout">Déconnexion</a></li>
             </ul>
         </div>
     </header>
@@ -38,15 +39,6 @@
 
                 <label for="article-content">Entrez le contenu de l'article</label>
                 <textarea id="article-content" placeholder="Entrez le contenu de l'article ici." rows="10" cols="100" name="content"></textarea>
-
-                <label for="article-user-firstname">Entrez votre prénom</label>
-                <input id="article-user-firstname" type="text" name="author.firstName">
-
-                <label for="article-user-lastname">Entrez votre nom</label>
-                <input id="article-user-lastname" type="text" name="author.lastName">
-
-                <label for="article-user-email">Entrez votre email</label>
-                <input id="article-user-email" type="email" name="author.email">
 
                 <div>
                     <button type="reset">Effacer</button>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArticleService {
@@ -38,20 +39,15 @@ public class ArticleService {
         return this.articles;
     }
 
-    public @Nullable Article getArticle(int id) {
+    public Optional<Article> getArticle(int id) {
         return this.articles
                 .stream()
                 .filter(a -> a.getId() == id)
-                .findFirst()
-                .orElseGet(null);
+                .findFirst();
     }
 
-    public Article deleteArticle(int id) {
-        Article article = this.getArticle(id);
-        if (article != null) {
-            this.articles.remove(article);
-        }
-
-        return article;
+    public void deleteArticle(int id) {
+        Optional<Article> article = this.getArticle(id);
+        article.ifPresent(this.articles::remove);
     }
 }

@@ -1,7 +1,9 @@
 package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.exception.NotFoundException;
+import com.doranco.coursSpring.exception.UnauthorizedException;
 import com.doranco.coursSpring.model.entity.Article;
+import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.ArticleService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ArticleController {
@@ -32,20 +35,28 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public RedirectView addArticle(@ModelAttribute Article article) {
+    public RedirectView addArticle(@ModelAttribute Article article, HttpSession session) throws UnauthorizedException {
+        Object loginAttribut = session.getAttribute("login");
+        if (loginAttribut == null) {
+            throw new UnauthorizedException();
+        }
+
+        User user = (User) session.getAttribute("login");
+        article.setAuthor(user);
+
         this.articleService.addArticle(article);
         return new RedirectView("/article");
     }
 
     @GetMapping("/article/{id}")
     public String getArticle(@PathVariable int id, Model model, HttpSession session) throws NotFoundException {
-        Article article = articleService.getArticle(id);
+        Optional<Article> article = articleService.getArticle(id);
 
-        if (article == null) {
+        if (article.isEmpty()) {
             throw new NotFoundException();
         }
 
-        model.addAttribute("article", article);
+        model.addAttribute("article", article.get());
         model.addAttribute("login", session.getAttribute("login"));
         return "article";
     }
@@ -53,10 +64,7 @@ public class ArticleController {
 
     @GetMapping("/article/{id}/delete")
     public RedirectView deleteArticle(@PathVariable int id) throws NotFoundException {
-        Article deletedArticle = this.articleService.deleteArticle(id);
-        if (deletedArticle == null) {
-            throw new NotFoundException();
-        }
+        this.articleService.deleteArticle(id);
 
         return new RedirectView("/article");
     }

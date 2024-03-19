@@ -15,8 +15,9 @@
     </nav>
     <div>
         <ul>
-            <li><a href="/user/register">Inscription</a></li>
-            <li><a href="/user/login">Connexion</a></li>
+            <li th:if="${login == null}"><a href="/user/register">Inscription</a></li>
+            <li th:if="${login == null}"><a href="/user/login">Connexion</a></li>
+            <li th:if="${login != null}"><a href="/logout">Déconnexion</a></li>
         </ul>
     </div>
 </header>

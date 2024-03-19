@@ -15,19 +15,20 @@
     </nav>
     <div>
         <ul>
-            <li><a href="/user/register">Inscription</a></li>
-            <li><a href="/user/login">Connexion</a></li>
+            <li th:if="${login == null}"><a href="/user/register">Inscription</a></li>
+            <li th:if="${login == null}"><a href="/user/login">Connexion</a></li>
+            <li th:if="${login != null}"><a href="/logout">Déconnexion</a></li>
         </ul>
     </div>
 </header>
 <main>
     <section>
         <form action="/register" method="post">
-            <label for="firstname">Prénom</label>
-            <input type="text" name="firstname" id="firstname">
+            <label for="lastName">Nom de famille</label>
+            <input type="text" name="lastName" id="lastName">
 
-            <label for="lastname">Nom de famille</label>
-            <input type="text" name="lastname" id="lastname">
+            <label for="firstName">Prénom</label>
+            <input type="text" name="firstName" id="firstName">
 
             <label for="email">Adresse email</label>
             <input type="email" name="email" id="email">
