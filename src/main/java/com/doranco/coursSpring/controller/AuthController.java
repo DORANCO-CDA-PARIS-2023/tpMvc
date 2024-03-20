@@ -67,7 +67,7 @@ public class AuthController {
     @GetMapping("/logout")
     public RedirectView logout(HttpSession session) {
         session.removeAttribute("login");
-        return new RedirectView("/login");
+        return new RedirectView("/");
     }
 
     @GetMapping("/login")
