@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/form.css">
     <title>Inscription</title>
 </head>
 <body>
@@ -11,17 +12,24 @@
 <main>
     <section>
         <form action="/register" method="post">
+            <div th:if="${error != null}">
+                <p th:text="'⚠️ ' + ${error}">Erreur</p>
+            </div>
+
             <label for="lastName">Nom de famille</label>
-            <input type="text" name="lastName" id="lastName">
+            <input required type="text" name="lastName" id="lastName">
 
             <label for="firstName">Prénom</label>
-            <input type="text" name="firstName" id="firstName">
+            <input required type="text" name="firstName" id="firstName">
 
             <label for="email">Adresse email</label>
-            <input type="email" name="email" id="email">
+            <input required type="email" name="email" id="email">
 
             <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password">
+            <input required type="password" name="password" id="password">
+
+            <label for="confirmPassword">Confirmation mot de passe</label>
+            <input required type="password" name="confirmPassword" id="confirmPassword">
 
             <button type="submit">Inscription</button>
         </form>

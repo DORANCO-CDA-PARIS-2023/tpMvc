@@ -4,6 +4,13 @@ import com.doranco.coursSpring.exception.ConflictException;
 import com.doranco.coursSpring.exception.NotFoundException;
 import com.doranco.coursSpring.exception.UnauthorizedException;
 import com.doranco.coursSpring.model.entity.User;
+import com.doranco.coursSpring.model.exception.AlreadyRegisteredException;
+import com.doranco.coursSpring.model.exception.IncompleteFormException;
+import com.doranco.coursSpring.model.exception.InvalidLoginException;
+import com.doranco.coursSpring.model.exception.MissMatchPasswordException;
+import com.doranco.coursSpring.model.form.LoginForm;
+import com.doranco.coursSpring.model.form.RegisterForm;
+import com.doranco.coursSpring.model.service.AuthService;
 import com.doranco.coursSpring.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -18,44 +25,43 @@ import java.util.Optional;
 @Controller
 public class AuthController {
 
-    private UserService userService;
+    private AuthService authService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/register")
-    public RedirectView register(@ModelAttribute User user) throws ConflictException {
-        Optional<User> userByEmail = userService.getUserByEmail(user.getEmail());
-        if (userByEmail.isPresent()) {
-            throw new ConflictException();
-        }
-
-        userService.addUser(user);
-        return new RedirectView("/login");
-    }
-
-    @PostMapping("/login")
-    public RedirectView login(@ModelAttribute User user, HttpSession session) throws UnauthorizedException, NotFoundException {
+    public Object register(@ModelAttribute RegisterForm registerForm, Model model, HttpSession session) {
         if (session.getAttribute("login") != null) {
             return new RedirectView("/article");
         }
 
-        if (user.getEmail() == null || user.getPassword() == null) {
-            throw new UnauthorizedException();
+        try {
+            this.authService.register(registerForm);
+            return new RedirectView("/login");
+        } catch (IncompleteFormException | AlreadyRegisteredException | MissMatchPasswordException e) {
+            model.addAttribute("error", e.getMessage());
         }
 
-        Optional<User> userByEmail = this.userService.getUserByEmail(user.getEmail());
-        if (userByEmail.isEmpty()) {
-            throw new NotFoundException();
+        return "register";
+    }
+
+    @PostMapping("/login")
+    public Object login(@ModelAttribute LoginForm loginForm, Model model, HttpSession session) {
+        if (session.getAttribute("login") != null) {
+            return new RedirectView("/article");
         }
 
-        if (!user.getPassword().equals(userByEmail.get().getPassword())) {
-            throw new UnauthorizedException();
+        try {
+            User login = this.authService.login(loginForm);
+            session.setAttribute("login",login);
+            return new RedirectView("/article");
+        } catch (IncompleteFormException | InvalidLoginException e) {
+            model.addAttribute("error", e.getMessage());
         }
 
-        session.setAttribute("login", userByEmail.get());
-        return new RedirectView("/article");
+        return "login";
     }
 
     @GetMapping("/logout")

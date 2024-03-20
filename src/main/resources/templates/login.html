@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/form.css">
     <title>Login</title>
 </head>
 <body>
@@ -11,11 +12,15 @@
 <main>
     <section>
         <form action="/login" method="post">
+            <div th:if="${error != null}">
+                <p th:text="'⚠️ ' + ${error}">Erreur</p>
+            </div>
+
             <label for="email">Adresse email</label>
-            <input type="email" name="email" id="email">
+            <input required type="email" name="email" id="email">
 
             <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password">
+            <input required type="password" name="password" id="password">
 
             <button type="submit">Connexion</button>
         </form>

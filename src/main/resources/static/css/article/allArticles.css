@@ -3,6 +3,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 60px;
+    text-align: center;
 }
 
 main section:nth-child(1) {

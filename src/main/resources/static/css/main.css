@@ -4,6 +4,28 @@
     font-family: Calibri, sans-serif;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 40px 80px;
+}
+
+a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+button {
+    font-size: 1.05rem;
+    padding: 5px 10px;
+    border: unset;
+    background-color: #333333;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 header {
     display: flex;
     flex-direction: row;

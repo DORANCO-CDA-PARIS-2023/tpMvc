@@ -1,0 +1,40 @@
+form div {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form div p {
+    color: darkred;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+}
+
+form input {
+    margin-bottom: 20px;
+    height: 30px;
+    padding-left: 5px;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid #333333;
+}
+
+form textarea {
+    margin-bottom: 20px;
+    padding: 5px 5px;
+    outline: 0;
+}
+
+form label {
+    margin-bottom: 5px;
+}
+
+form button {
+    width: fit-content;
+}

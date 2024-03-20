@@ -3,24 +3,3 @@ main section:nth-child(1) {
     flex-direction: row;
     justify-content: center;
 }
-
-main section:nth-child(1) form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 360px;
-}
-
-main section:nth-child(1) form input, textarea {
-    margin-bottom: 20px;
-}
-
-main section:nth-child(1) form input {
-    height: 30px;
-    border-radius: 4px;
-}
-
-main section:nth-child(1) form textarea {
-    resize: none;
-    width: 100%;
-}
