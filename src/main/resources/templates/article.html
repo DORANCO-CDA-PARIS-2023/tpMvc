@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li th:if="${session.user == null}"><a href="/login">Connexion</a></li>
+                <li th:if="${session.user == null}"><a href="/register">Inscription</a></li>
+                <li th:if="${session.user != null}"><a href="/logout">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+<main>
+    <h1 th:text="${article.title}" >Titre de l'artice</h1>
+    <p th:text="${article.content}">Contenue de l'article ...</p>
+    <a th:href="@{'/article/' + ${article.id} + '/delete'}" >supprimer</a>
+</main>
+</body>
+</html>

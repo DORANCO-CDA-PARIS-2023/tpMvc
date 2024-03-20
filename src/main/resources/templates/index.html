@@ -2,55 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TP CSS</title>
+    <title>Cours SPRING</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a>Home</a></li>
+                <li><a href="/">Home</a></li>
+                <li th:if="${session.user == null}"><a href="/login">Connexion</a></li>
+                <li th:if="${session.user == null}"><a href="/register">Inscription</a></li>
+                <li th:if="${session.user != null}"><a href="/logout">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
+    
     <main>
         <section>
-
-            <h1>Titre de ma page !</h1>
             <!-- ALL ARTICLE LIST -->
             <div>
-                <div th:each="article : ${articles}">
+                <article th:each="article: ${articles}">
                     <h2 th:text="${article.title}">Title article</h2>
-                    <p th:text="${article.content}">Content article</p>
-                    <p>
-                        Author: <span th:text="${article.author.firstName} + ' ' + ${article.author.lastName}"></span>
-                    </p>
-                </div>
+                    <a th:href="@{'/article/' + ${article.id} }">Link to article</a>
+                </article>
             </div>
         </section>
 
         <section>
-            <!-- ADD ARTICLE FORM -->
-            <form action="/ajout" method="post">
-                <label for="title">titre :</label>
-                <input id="title" type="text" name="title">
-                
-                <label for="content">contenu :</label>
-                <textarea id="content" name="content"></textarea>
-                
-                <label for="firstname">prennom :</label>
-                <input id="firstname" type="text" name="author.firstName">
-                
-                <label for="lastname">nom :</label>
-                <input id="lastname" type="text" name="author.lastName">
-                
-                <label for="email">email :</label>
-                <input id="email" type="email" name="author.email">
-                
+            <!-- ADD ARTICLE  -->
+            <form method="post" action="/article">
                 <div>
-                    <button type="reset">Effacer</button>
-                    <button type="submit">Ajouter</button>
+                    <label for="title">Title</label>
+                    <input id="title" type="text" name="title">
                 </div>
+                <div>
+                    <label for="content">content</label>
+                    <textarea id="content" name="content"></textarea>
+                </div>
+                <button type="submit">ajouter</button>
             </form>
         </section>
     </main>
