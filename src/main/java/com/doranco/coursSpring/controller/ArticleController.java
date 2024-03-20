@@ -42,7 +42,7 @@ public class ArticleController {
 
 
     @GetMapping("/article/{id}/delete")
-    public RedirectView deteteArticle(@PathVariable int id) {
+    public RedirectView deleteArticle(@PathVariable int id) {
         articleService.deleteArticle(id);
         return new RedirectView("/article");
     }
