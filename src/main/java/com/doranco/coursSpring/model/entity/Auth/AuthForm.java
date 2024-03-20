@@ -1,19 +1,19 @@
-package com.doranco.coursSpring.model.entity;
+package com.doranco.coursSpring.model.entity.Auth;
 
-public class User {
+public class AuthForm {
 
-    private String lastName;
     private String firstName;
+    private String lastName;
     private String email;
     private String password;
+    private String cpassword;
 
-    public User() {}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public User(String lastName, String firstName, String email, String password) {
-        this.lastName = lastName;
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-        this.email = email;
-        this.password = password;
     }
 
     public String getLastName() {
@@ -22,14 +22,6 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getEmail() {
@@ -48,13 +40,22 @@ public class User {
         this.password = password;
     }
 
+    public String getCpassword() {
+        return cpassword;
+    }
+
+    public void setCpassword(String cpassword) {
+        this.cpassword = cpassword;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
+        return "AuthForm{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", cpassword='" + cpassword + '\'' +
                 '}';
     }
 }
