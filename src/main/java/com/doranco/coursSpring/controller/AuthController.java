@@ -27,8 +27,10 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public String login()
-    {
+    public String login(HttpSession session) {
+        if (session.getAttribute("user") != null) {
+            return "redirect:/index";
+        }
         return "auth/login";
     }
 
@@ -52,8 +54,10 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String register()
-    {
+    public String register(HttpSession session) {
+        if (session.getAttribute("user") != null) {
+            return "redirect:/index";
+        }
         return "auth/register";
     }
 
