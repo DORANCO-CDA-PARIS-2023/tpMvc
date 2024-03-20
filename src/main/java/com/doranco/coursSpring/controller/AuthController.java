@@ -42,11 +42,11 @@ public class AuthController {
         try {
             User user = authService.login(loginForm);
             session.setAttribute("user", user);
-            model.addAttribute("success", "Connexion validé ! ");
+            model.addAttribute("success", "Connexion validée ! ");
         } catch (EmptyFormException e) {
             model.addAttribute("error", "Les champs sont obligatoires !");
         } catch (NotFoundUserException e) {
-            model.addAttribute("error", "Identifiants invalide");
+            model.addAttribute("error", "Identifiants invalides");
         }
         return "auth/login";
     }
@@ -62,9 +62,9 @@ public class AuthController {
     {
         try {
             authService.register(form);
-            model.addAttribute("success", "Inscription terminé !");
+            model.addAttribute("success", "Inscription terminée !");
         } catch (MismatchPasswordException e) {
-            model.addAttribute("error", "Les mots de passes sont differents");
+            model.addAttribute("error", "Les mots de passe sont différents");
         } catch (EmptyFormException e) {
             model.addAttribute("error", "Les champs sont obligatoires !");
         }
