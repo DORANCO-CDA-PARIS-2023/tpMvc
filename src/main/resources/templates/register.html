@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Register</a></li>
+                <li><a href="">Log in</a></li>
+                <li><a href="">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <!-- ADD ARTICLE  -->
+        <form method="post" action="/register">
+            <div>
+                <label for="firstName">First name : </label>
+                <input id="firstName" type="text" name="firstName">
+            </div>
+            <div>
+                <label for="lastName">Last name : </label>
+                <input id="lastName" type="text" name="lastName">
+            </div>
+            <div>
+                <label for="email">Email : </label>
+                <input id="email" type="text" name="email">
+            </div>
+            <button type="submit">S'inscrire</button>
+        </form>
+    </section>
+</body>
+</html>
