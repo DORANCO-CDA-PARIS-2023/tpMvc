@@ -17,6 +17,13 @@ public class UserService {
     public UserService() {
         this.idCount = 1;
         this.users = new ArrayList<>();
+        this.users.add(new User(
+                this.idCount++,
+                "Anselin",
+                "Ludovic",
+                "ludovicanselin@gmail.com",
+                "test"
+        ));
     }
 
     public void addUser(User user) {

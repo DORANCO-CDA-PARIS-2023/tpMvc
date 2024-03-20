@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Article | ' + ${article.getTitle()}">Article</title>
+    <link rel="stylesheet" href="/css/article/article.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <section>
+        <article>
+            <h1 th:text="${article.title}">Article Titre</h1>
+            <p th:text="${article.content}">Article Contenu</p>
+            <footer>
+                <p th:text="'Posté par ' + ${article.getAuthor().getFirstName()} + ' ' + ${article.getAuthor().getLastName()}">
+                    Posté par User Firstname User Lastname
+                </p>
+                <a th:if="${login != null && login.getId() == article.getAuthor().getId()}" th:href="'/user/article/' + ${article.id} + '/modify'">📝Modifier</a>
+                <a th:if="${login != null && login.getId() == article.getAuthor().getId()}" th:href="'/article/' + ${article.id} + '/delete'">🗑️Supprimer</a>
+            </footer>
+        </article>
+    </section>
+</main>
+</body>
+</html>

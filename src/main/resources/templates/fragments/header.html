@@ -1,0 +1,14 @@
+<header>
+    <nav>
+        <ul>
+            <li><a href="/article">Home</a></li>
+        </ul>
+    </nav>
+    <div>
+        <ul>
+            <li th:if="${login == null}"><a href="/user/register">Inscription</a></li>
+            <li th:if="${login == null}"><a href="/user/login">Connexion</a></li>
+            <li th:if="${login != null}"><a href="/logout">Déconnexion</a></li>
+        </ul>
+    </div>
+</header>

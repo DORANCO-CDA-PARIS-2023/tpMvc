@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modification de l'article</title>
+    <link rel="stylesheet" href="/css/article/modifyArticle.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <section th:if="${article != null}">
+        <!-- ADD ARTICLE  -->
+        <form th:action="@{'/article/' + ${article.getId()} + '/modify'}" method="post">
+            <label for="article-title">Modifiez le titre de l'article</label>
+            <input id="article-title" type="text" name="title" th:value="${article.getTitle()}">
+
+            <label for="article-content">Modifiez le contenu de l'article</label>
+            <textarea id="article-content" rows="10" cols="100" name="content" th:text="${article.getContent()}"></textarea>
+
+            <div>
+                <button type="submit">Modifier</button>
+            </div>
+        </form>
+    </section>
+    <h1 th:if="${article == null}">Impossible de trouver l'article demandé.</h1>
+</main>
+</body>
+</html>

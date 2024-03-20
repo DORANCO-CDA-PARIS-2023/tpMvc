@@ -1,0 +1,17 @@
+main {
+    margin: 40px 80px;
+}
+
+
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

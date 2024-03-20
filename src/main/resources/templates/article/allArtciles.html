@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/article/allArticles.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <main>
+        <section>
+            <div th:each="article : ${articles}">
+                <div>
+                    <h2 th:text="${article.title}">Title article</h2>
+                    <a th:href="@{/article/{id}(id=${article.id})}">Link to article</a>
+                </div>
+            </div>
+        </section>
+        <p>
+            Cliquez <a th:href="@{/user/article/add}">ici</a> pour rédiger un article.
+        </p>
+    </main>
+</body>
+</html>

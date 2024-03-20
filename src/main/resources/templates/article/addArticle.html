@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rédaction d'un article</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/article/addArticle.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <section>
+        <!-- ADD ARTICLE  -->
+        <form th:action="@{/article}" method="post">
+            <label for="article-title">Entrez le titre de l'article</label>
+            <input id="article-title" type="text" name="title">
+
+            <label for="article-content">Entrez le contenu de l'article</label>
+            <textarea id="article-content" placeholder="Entrez le contenu de l'article ici." rows="10" cols="100" name="content"></textarea>
+
+            <div>
+                <button type="submit">Ajouter</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

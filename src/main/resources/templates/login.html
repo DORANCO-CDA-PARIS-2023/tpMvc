@@ -2,25 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/login.css">
     <title>Login</title>
 </head>
 <body>
-<header>
-    <nav>
-        <ul>
-            <li><a href="/article">Home</a></li>
-        </ul>
-    </nav>
-    <div>
-        <ul>
-            <li th:if="${login == null}"><a href="/user/register">Inscription</a></li>
-            <li th:if="${login == null}"><a href="/user/login">Connexion</a></li>
-            <li th:if="${login != null}"><a href="/logout">Déconnexion</a></li>
-        </ul>
-    </div>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 <main>
     <section>
         <form action="/login" method="post">

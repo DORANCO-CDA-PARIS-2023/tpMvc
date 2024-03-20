@@ -27,11 +27,15 @@ public class ArticleController {
 
 
     @GetMapping("/article")
-    public String listArticles(Model model, HttpSession session) {
+    public Object listArticles(Model model, HttpSession session) {
+        if (session.getAttribute("login") == null) {
+            return new RedirectView("/user/login");
+        }
+
         List<Article> articles = this.articleService.getArticles();
         model.addAttribute("articles", articles);
         model.addAttribute("login", session.getAttribute("login"));
-        return "index";
+        return "article/allArtciles";
     }
 
     @PostMapping("/article")
@@ -58,7 +62,7 @@ public class ArticleController {
 
         model.addAttribute("article", article.get());
         model.addAttribute("login", session.getAttribute("login"));
-        return "article";
+        return "article/article";
     }
 
 
@@ -67,6 +71,17 @@ public class ArticleController {
         this.articleService.deleteArticle(id);
 
         return new RedirectView("/article");
+    }
+
+    @PostMapping("/article/{id}/modify")
+    public RedirectView modifyArticle(@ModelAttribute Article article) {
+        Optional<Article> serviceArticle = this.articleService.getArticle(article.getId());
+        if (serviceArticle.isPresent()) {
+            serviceArticle.get().setTitle(article.getTitle());
+            serviceArticle.get().setContent(article.getContent());
+        }
+
+        return new RedirectView("/article/" + article.getId());
     }
 
 }

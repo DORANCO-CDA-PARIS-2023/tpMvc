@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Calibri, sans-serif;
+}
+
 header {
     display: flex;
     flex-direction: row;
