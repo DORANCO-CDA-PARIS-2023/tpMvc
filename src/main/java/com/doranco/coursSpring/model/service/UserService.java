@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -12,8 +13,8 @@ public class UserService {
     private final List<User> users = new ArrayList<>();
 
     public UserService() {
-        User tintin = new User("John", "Smith", "test@gmail.fr");
-        users.add(tintin);
+        User John = new User("John", "Smith", "test@gmail.fr");
+        users.add(John);
 
     }
     public void addUser(User user) {
@@ -26,5 +27,14 @@ public class UserService {
 
     public void deleteUser (int id){
 
+    }
+
+    public Optional<User> authenticate(String email) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                return Optional.of(user);
+            }
+        }
+        return Optional.empty();
     }
 }
