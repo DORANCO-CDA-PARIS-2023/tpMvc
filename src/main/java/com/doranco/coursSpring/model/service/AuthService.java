@@ -58,4 +58,10 @@ public class AuthService {
         }
         return user;
     }
+
+	public UserService getUserService() {
+		return userService;
+	}
+    
+    
 }

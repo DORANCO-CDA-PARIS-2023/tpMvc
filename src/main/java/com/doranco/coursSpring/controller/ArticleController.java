@@ -21,10 +21,7 @@ public class ArticleController {
     }
 
 
-    @GetMapping("/")
-    public RedirectView home() {
-        return new RedirectView("/article");
-    }
+
 
     @GetMapping("/article")
     public String listArticles(Model model) {

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class AuthController {
@@ -25,11 +26,24 @@ public class AuthController {
         this.authService = authService;
     }
 
+    @GetMapping("/")
+    public RedirectView home(HttpSession session) {
+    	if(session.getAttribute("user") != null) {
+    		return new RedirectView("/article");
+    	}
+        return new RedirectView("/login");
+    }
 
     @GetMapping("/login")
-    public String login()
+    public String login(HttpSession session)
     {
-        return "auth/login";
+    	if(authService.getUserService().getUserList().isEmpty()) {
+    		return "auth/register";
+    	} else if(session.getAttribute("user") != null) {
+    		return "index";
+    	} else {
+            return "auth/login";
+    	}
     }
 
     @PostMapping("/login")
