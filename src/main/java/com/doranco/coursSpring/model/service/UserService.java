@@ -18,7 +18,7 @@ public class UserService {
     users.add(Lucho);
 
     }
-    public void add(User user) {
+    public void addUser(User user) {
         users.add(user);
     }
 
@@ -26,7 +26,17 @@ public class UserService {
         return users;
     }
 
+    public User getUser(int id) {
+        for(User user : users) {
+            if (user.getId() == id)
+                return user;
+        }
+        return null;
+    }
+
     public void deleteUser (int id){
+        User user = getUser(id);
+        users.remove(user);
 
     }
 }

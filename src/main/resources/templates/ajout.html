@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Ajouter un article</h1>
-<form action="#" th:action="@{/article}" th:object= "${article}" method="post">
+<form action="#" th:action="@{/addArticle}" th:object= "${article}" method="post">
     <label for="id">ID:</label><br>
     <input type="number" id="id" th:field="*{id}"><br>
     <label for="title">Titre:</label><br>

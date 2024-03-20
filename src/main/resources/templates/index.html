@@ -2,37 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TP CSS</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Login</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a>Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-
-                <div>
-                    <h2>Title article</h2>
-                    <a href="/ajout">Ajouter un article</a>
-                </div>
-
-            <div th:each="article : ${articles}">
-                <h2 th:text="${article.title}">Title article</h2>
-                <a th:href="@{'/article/' + ${article.id}}">Lire l'article</a>
-            </div>
-
-
-        </section>
-
-        <section>
-            <!-- ADD ARTICLE  -->
-            <form></form>
-        </section>
-    </main>
+<h1>Se connecter</h1>
+<form action="#" th:action="@{/login}" th:object="${user}" method="post">
+    <label for="lastName">Nom:</label><br>
+    <input type="text" id="lastName" th:field="*{lastName}"><br>
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" th:field="*{email}"><br>
+    <input type="submit" value="Se connecter">
+</form>
 </body>
 </html>

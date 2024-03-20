@@ -47,6 +47,5 @@ articles.add(article);
        Article article = getArticle(id);
       if (article != null)
           articles.remove(article);
-
     }
 }

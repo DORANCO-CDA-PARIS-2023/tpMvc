@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste Users</title>
+</head>
+<body>
+header>
+<nav>
+    <ul>
+        <li><a>Liste des Users</a></li>
+    </ul>
+</nav>
+</header>
+<main>
+    <section>
+
+        <div>
+            <h2>Ajouter un Utilisateur</h2>
+            <a href="/adduser">Ajouter un Utilisateur</a>
+        </div>
+
+        <div th:each="user : ${users}">
+            <h2 th:text="${user.firstName}">Nom</h2>
+            <a th:href="@{'/user/' + ${user.id}}">Voir les détails</a>
+        </div>
+
+
+    </section>
+
+    <section>
+        <!-- ADD ARTICLE  -->
+        <form></form>
+    </section>
+</main>
+</body>
+</html>

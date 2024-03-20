@@ -2,6 +2,9 @@ package com.doranco.coursSpring.model.entity;
 
 public class User {
 
+
+
+    private int id;
     private String lastName;
     private String firstName;
     private String email;
@@ -38,10 +41,19 @@ public class User {
         this.email = email;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "lastName='" + lastName + '\'' +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
