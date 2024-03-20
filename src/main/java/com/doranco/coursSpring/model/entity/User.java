@@ -2,6 +2,7 @@ package com.doranco.coursSpring.model.entity;
 
 public class User {
 
+	private int id;
 	private String lastName;
 	private String firstName;
 	private String userName;
@@ -11,12 +12,30 @@ public class User {
 	public User() {
 	}
 
-	public User(String lastName, String firstName, String userName, String password, String email) {
+	public User(int id, String lastName, String firstName, String userName, String password, String email) {
+		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
+	}
+
+	public User(String lastName, String firstName, String userName, String password, String email) {
+		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.userName = userName;
+		this.password = password;
+		this.email = email;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLastName() {

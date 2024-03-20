@@ -2,6 +2,9 @@ package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
@@ -19,8 +22,11 @@ public class ArticleController {
 	}
 
 	@GetMapping("/")
-	public String listArticles(Model model) {
+	public String listArticles(Model model, HttpSession session) {
 		var articles = this.articleService.getArticles();
+		if (session.getAttribute("login") != null) {
+			model.addAttribute("login", session.getAttribute("login"));
+		}
 		model.addAttribute("articles", articles);
 		return "index";
 	}

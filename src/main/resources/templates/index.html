@@ -16,6 +16,9 @@
 		</nav>
 	</header>
 	<main>
+		
+		<h2 th:login="${login.setUserName}" >Corrent Utilisateur</h2>
+		
 		<section>
 			<div th:if="${articles != null}">
 				<div th:each="article : ${articles}">
