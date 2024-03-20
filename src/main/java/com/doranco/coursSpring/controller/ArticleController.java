@@ -29,7 +29,7 @@ public class ArticleController {
     @GetMapping("/article")
     public Object listArticles(Model model, HttpSession session) {
         if (session.getAttribute("login") == null) {
-            return new RedirectView("/user/login");
+            return new RedirectView("/login");
         }
 
         List<Article> articles = this.articleService.getArticles();
@@ -65,6 +65,17 @@ public class ArticleController {
         return "article/article";
     }
 
+    @GetMapping("/article/add")
+    public Object addArticle(Model model, HttpSession session) {
+        if (session.getAttribute("login") == null) {
+            return new RedirectView("/login");
+        }
+
+        model.addAttribute("login", session.getAttribute("login"));
+
+        return "article/addArticle";
+    }
+
 
     @GetMapping("/article/{id}/delete")
     public RedirectView deleteArticle(@PathVariable int id) throws NotFoundException {
@@ -82,6 +93,18 @@ public class ArticleController {
         }
 
         return new RedirectView("/article/" + article.getId());
+    }
+
+    @GetMapping("/article/{id}/modify")
+    public Object modifyArticle(@PathVariable int id, Model model, HttpSession session) {
+        if (session.getAttribute("login") == null) {
+            return new RedirectView("/login");
+        }
+
+        model.addAttribute("login", session.getAttribute("login"));
+        model.addAttribute("article", articleService.getArticle(id).isEmpty() ? null : articleService.getArticle(id).get() );
+
+        return "article/modifyArticle";
     }
 
 }

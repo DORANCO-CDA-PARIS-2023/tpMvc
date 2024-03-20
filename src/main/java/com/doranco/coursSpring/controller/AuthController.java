@@ -7,6 +7,7 @@ import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ public class AuthController {
         }
 
         userService.addUser(user);
-        return new RedirectView("/user/login");
+        return new RedirectView("/login");
     }
 
     @PostMapping("/login")
@@ -60,7 +61,19 @@ public class AuthController {
     @GetMapping("/logout")
     public RedirectView logout(HttpSession session) {
         session.removeAttribute("login");
-        return new RedirectView("/user/login");
+        return new RedirectView("/login");
+    }
+
+    @GetMapping("/login")
+    public String getUserLogin(Model model, HttpSession session) {
+        model.addAttribute("login", session.getAttribute("login"));
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String getuserRegister(Model model, HttpSession session) {
+        model.addAttribute("login", session.getAttribute("login"));
+        return "register";
     }
 
 }

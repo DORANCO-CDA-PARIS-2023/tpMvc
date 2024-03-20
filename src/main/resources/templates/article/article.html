@@ -17,7 +17,7 @@
                 <p th:text="'Posté par ' + ${article.getAuthor().getFirstName()} + ' ' + ${article.getAuthor().getLastName()}">
                     Posté par User Firstname User Lastname
                 </p>
-                <a th:if="${login != null && login.getId() == article.getAuthor().getId()}" th:href="'/user/article/' + ${article.id} + '/modify'">📝Modifier</a>
+                <a th:if="${login != null && login.getId() == article.getAuthor().getId()}" th:href="'/article/' + ${article.id} + '/modify'">📝Modifier</a>
                 <a th:if="${login != null && login.getId() == article.getAuthor().getId()}" th:href="'/article/' + ${article.id} + '/delete'">🗑️Supprimer</a>
             </footer>
         </article>
