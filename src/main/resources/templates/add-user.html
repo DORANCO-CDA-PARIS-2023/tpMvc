@@ -6,13 +6,14 @@
 </head>
 <body>
 <!--/*@thymesVar id="user" type="jakarta"*/-->
-<form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
-    <label for="name">Name</label>
-    <input id="name" placeholder="Name" th:field="*{user.name}" type="text">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{user.name}"></span>
+<form action="#" th:action="@{/user}" th:object="${user}" method="post">
+    <label for="firstName">Name</label>
+    <!--/*@thymesVar id="firstName" type=""*/-->
+    <input id="firstName" placeholder="Name" th:field="${user.firstName}" type="text">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="${user.firstName}"></span>
     <label for="email">Email</label>
-    <input type="text" th:field="*{user.email}" id="email" placeholder="Email">
-    <span th:if="${#fields.hasErrors('email')}" th:errors="*{user.email}"></span>
+    <input th:id="email" type="text" th:field="${user.email}" id="email" placeholder="Email">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="${user.email}"></span>
     <input type="submit" value="Add User">
 </form>
 </body>
