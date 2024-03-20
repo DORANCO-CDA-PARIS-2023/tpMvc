@@ -32,14 +32,14 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public Object register(@ModelAttribute RegisterForm registerForm, Model model, HttpSession session) {
+    public String register(@ModelAttribute RegisterForm registerForm, Model model, HttpSession session) {
         if (session.getAttribute("login") != null) {
-            return new RedirectView("/article");
+            return "redirect:/";
         }
 
         try {
             this.authService.register(registerForm);
-            return new RedirectView("/login");
+            return "redirect:/login";
         } catch (IncompleteFormException | AlreadyRegisteredException | MissMatchPasswordException e) {
             model.addAttribute("error", e.getMessage());
         }
@@ -50,13 +50,13 @@ public class AuthController {
     @PostMapping("/login")
     public Object login(@ModelAttribute LoginForm loginForm, Model model, HttpSession session) {
         if (session.getAttribute("login") != null) {
-            return new RedirectView("/article");
+            return "redirect:/";
         }
 
         try {
             User login = this.authService.login(loginForm);
             session.setAttribute("login",login);
-            return new RedirectView("/article");
+            return "redirect:/";
         } catch (IncompleteFormException | InvalidLoginException e) {
             model.addAttribute("error", e.getMessage());
         }
