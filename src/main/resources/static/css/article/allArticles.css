@@ -22,8 +22,15 @@ main section:nth-child(1) > div {
     padding: 20px 30px;
 
     width: 226px;
-    border: gray solid 1px;
+    border: rgba(128, 128, 128, 0.2) solid 1px;
     border-radius: 4px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+    transition: ease-in-out 600ms;
+}
+
+main section:nth-child(1) > div:hover {
+    transition: ease-in-out 200ms;
+    transform: scale(1.03);
 }
 
 main section:nth-child(1) > div  > div {
