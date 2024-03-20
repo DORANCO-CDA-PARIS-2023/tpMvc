@@ -13,6 +13,9 @@ public class UserService {
 
     public UserService()
     {
+        if (userList.isEmpty()) {
+            userList.add(new User("toto", "toto", "toto@toto.fr", "toto"));
+        }
     }
 
     public List<User> getUserList() {
