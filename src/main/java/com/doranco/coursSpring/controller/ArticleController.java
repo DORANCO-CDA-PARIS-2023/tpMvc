@@ -2,6 +2,7 @@ package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
@@ -19,6 +20,11 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
+
+    @GetMapping("/")
+    public RedirectView home() {
+        return new RedirectView("/article");
+    }
 
     @GetMapping("/article")
     public String listArticles(Model model) {

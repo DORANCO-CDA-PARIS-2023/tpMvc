@@ -5,36 +5,38 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-    private final List<User> users = new ArrayList<>();
+    private static final List<User> userList = new ArrayList<>();;
 
-    public UserService() {
-        User John = new User("John", "Smith", "test@gmail.fr");
-        users.add(John);
-
-    }
-    public void addUser(User user) {
-        users.add(user);
+    public UserService()
+    {
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void deleteUser (int id){
-
+    public void add(User user)
+    {
+        userList.add(user);
     }
 
-    public Optional<User> authenticate(String email) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                return Optional.of(user);
+    public void delete(User user)
+    {
+        userList.remove(user);
+    }
+
+    public User findByEmailAndPassword(String email, String password)
+    {
+        for(User user : userList)
+        {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password))  {
+                return user;
             }
         }
-        return Optional.empty();
+        return null;
     }
 }
