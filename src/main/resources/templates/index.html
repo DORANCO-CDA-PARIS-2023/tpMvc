@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Cours SPRING</title>
@@ -9,23 +9,26 @@
     <header>
         <nav>
             <ul>
-                <li><a>Home</a></li>
+                <li><a href="/" th:href="@{/}">Accueil</a></li>
+                <li th:unless="${session.currentUser != null}"><a href="/login" th:href="@{/login}">Connexion</a></li>
+                <li th:unless="${session.currentUser != null}"><a href="/register" th:href="@{/register}">Inscription</a></li>
             </ul>
+            <div th:if="${session.currentUser != null}" style="float: right;">
+                <span th:text="${session.currentUser.firstName}">Prénom</span>
+            </div>
         </nav>
     </header>
     <main>
         <section>
             <!-- ALL ARTICLE LIST -->
             <div>
-                <article th:each="article: ${articles}">
-                    <h2 th:text="${article.title}">Title article</h2>
-                    <a th:href="@{'/article/' + ${article.id} }">Link to article</a>
+                <article th:each="article : ${articles}">
+                    <h2 th:text="${article.title}">Titre article</h2>
+                    <a th:href="@{'/article/' + ${article.id}}">Lien vers l'article</a>
                 </article>
-            </div>
-            
+            </div>  
         </section>
-
-        <section>
+        <section th:if="${session.currentUser != null}">
             <!-- ADD ARTICLE  -->
             <form method="post" action="/article">
                 <div>
@@ -36,21 +39,8 @@
                     <label for="content">Contenu</label>
                     <textarea id="content" name="content"></textarea>
                 </div>
-                <div>
-                    <label for="authorFirstName">Prénom</label>
-                    <input id="authorFirstName" type="text" name="authorFirstName">
-                </div>
-                <div>
-                    <label for="authorLastName">Nom</label>
-                    <input id="authorLastName" type="text" name="authorLastName">
-                </div>
-                <div>
-                    <label for="authorEmail">Email</label>
-                    <input id="authorEmail" type="text" name="authorEmail">
-                </div>
                 <button type="submit">Ajouter</button>
             </form>
-            
         </section>
     </main>
 </body>

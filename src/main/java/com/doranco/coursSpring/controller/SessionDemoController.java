@@ -1,7 +1,5 @@
 package com.doranco.coursSpring.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +10,7 @@ public class SessionDemoController {
 
     @GetMapping("/session")
     @ResponseBody
-    public String session(HttpSession session)
-    {
+    public String session(HttpSession session) {
         if (session.getAttribute("login") == null) {
             session.setAttribute("login", "Robert");
             return "Session VIDE";
@@ -23,8 +20,7 @@ public class SessionDemoController {
 
     @GetMapping("/session/remove")
     @ResponseBody
-    public String removeSession(HttpSession session)
-    {
+    public String removeSession(HttpSession session) {
         session.removeAttribute("login");
         return "Session clean ...";
     }
