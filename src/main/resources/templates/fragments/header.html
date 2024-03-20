@@ -6,9 +6,9 @@
     </nav>
     <div>
         <ul>
-            <li th:if="${login == null}"><a href="/register">Inscription</a></li>
-            <li th:if="${login == null}"><a href="/login">Connexion</a></li>
-            <li th:if="${login != null}"><a href="/logout">Déconnexion</a></li>
+            <li th:if="${#ctx.session.get('login') == null}"><a href="/register">Inscription</a></li>
+            <li th:if="${#ctx.session.get('login') == null}"><a href="/login">Connexion</a></li>
+            <li th:if="${#ctx.session.get('login') != null}"><a href="/logout">Déconnexion</a></li>
         </ul>
     </div>
 </header>

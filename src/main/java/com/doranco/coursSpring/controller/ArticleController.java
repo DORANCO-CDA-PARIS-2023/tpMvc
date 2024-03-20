@@ -39,7 +39,6 @@ public class ArticleController {
 
         List<Article> articles = this.articleService.getArticles();
         model.addAttribute("articles", articles);
-        model.addAttribute("login", session.getAttribute("login"));
         return "article/allArtciles";
     }
 
@@ -66,7 +65,6 @@ public class ArticleController {
         }
 
         model.addAttribute("article", article.get());
-        model.addAttribute("login", session.getAttribute("login"));
         return "article/article";
     }
 
@@ -106,7 +104,6 @@ public class ArticleController {
             return "redirect:/login";
         }
 
-        model.addAttribute("login", session.getAttribute("login"));
         model.addAttribute("article", articleService.getArticle(id).isEmpty() ? null : articleService.getArticle(id).get() );
 
         return "article/modifyArticle";
