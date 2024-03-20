@@ -15,6 +15,7 @@
             </ul>
             <div th:if="${session.currentUser != null}" style="float: right;">
                 <span th:text="${session.currentUser.firstName}">Prénom</span>
+                <a href="/logout" th:href="@{/logout}" style="margin-left: 10px;">Déconnexion</a>
             </div>
         </nav>
     </header>
