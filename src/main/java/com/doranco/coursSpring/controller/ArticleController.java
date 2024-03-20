@@ -36,7 +36,9 @@ public class ArticleController {
     }
 
     @GetMapping("/signup")
-    public String showSignUpForm(User user) {
+    public String showSignUpForm(Model model) {
+        User  user=new User();
+         model.addAttribute(user);
         return "add-user";
     }
 

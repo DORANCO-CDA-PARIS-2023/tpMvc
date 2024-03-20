@@ -87,4 +87,10 @@ public class ArticleService {
         Article article = getArticle(id);
         articles.remove(article);
     }
+    public void signup(User user){
+        user.getFirstName();
+        user.getLastName();
+        user.getEmail();
+
+    }
 }
