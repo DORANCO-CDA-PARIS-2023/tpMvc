@@ -13,6 +13,8 @@ public class UserService {
 
     public UserService()
     {
+    	User t = new User("t", "t", "test@test.test", "t");
+    	userList.add(t);
     }
 
     public List<User> getUserList() {

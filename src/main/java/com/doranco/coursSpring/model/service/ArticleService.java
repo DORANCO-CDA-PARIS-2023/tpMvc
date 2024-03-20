@@ -88,4 +88,14 @@ public class ArticleService {
         Article article = getArticle(id);
         articles.remove(article);
     }
+    
+    public List<Article> getArticlesByAuthor(User user){
+    	List<Article> result = new ArrayList();
+    	for(Article a : articles) {
+    		if(a.getAuthor().equals(user)) {
+    			result.add(a);
+    		}
+    	}
+    	return result;
+    }
 }
