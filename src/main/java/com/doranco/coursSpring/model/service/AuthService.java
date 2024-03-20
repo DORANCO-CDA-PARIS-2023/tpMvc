@@ -1,9 +1,11 @@
 package com.doranco.coursSpring.model.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.doranco.coursSpring.model.entity.User;
 
+@Service
 public class AuthService {
 
 	private final UserService userService;
