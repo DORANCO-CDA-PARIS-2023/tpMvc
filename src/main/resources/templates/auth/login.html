@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
+
 <body>
 
 	<h1>Login</h1>
+	<div class="formMessage error" th:if="${error != null}" th:text="${error}"></div>
+	<div class="formMessage success" th:if="${success != null}" th:text="${success}"></div>
 	<form action="/login" method="post">
-		<p>Username: <input type="text" name="username" /></p>
-		<p>Password: <input type="password" name="password" /></p>
-		<p><input type="submit" value="Login" /> <input type="reset" value="Reset" /></p>
+		<div>
+			<label for="email">email</label>
+			<input id="email" name="email" type="email">
+		</div>
+		<div>
+			<label for="password">password</label>
+			<input id="password" name="password" type="password">
+		</div>
+		<button type="submit">login</button>
 	</form>
-	
+
 	<a href="/register">Register</a>
 
 </body>
+
 </html>
