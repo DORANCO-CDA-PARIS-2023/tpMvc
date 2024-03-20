@@ -1,6 +1,7 @@
 package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.model.entity.Article;
+import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -20,18 +21,25 @@ public class ArticleController {
     }
 
 
-    @GetMapping("/article")
+    @GetMapping("/show")
     public String listArticles(Model model) {
         var articles = this.articleService.getArticles();
         model.addAttribute("articles", articles);
         return "index";
     }
 
-    @PostMapping("/article")
+    @PostMapping("/addarticle")
     public RedirectView addArticle(@ModelAttribute Article article) {
+
         articleService.addArticle(article);
         return new RedirectView("/article");
     }
+
+    @GetMapping("/signup")
+    public String showSignUpForm(User user) {
+        return "add-user";
+    }
+
 
     @GetMapping("/article/{id}")
     public String getArticle(@PathVariable int id, Model model) {
