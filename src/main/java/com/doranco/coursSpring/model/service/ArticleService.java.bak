@@ -10,17 +10,28 @@ import java.util.List;
 @Service
 public class ArticleService {
 
+<<<<<<< HEAD
     private static final List<Article> articles = new ArrayList<>();;
 
     public ArticleService() {
        // articles =
         var author = new User("Bob", "Bobby", "bob@bobby.com", "1234");
+=======
+    private final List<Article> articles;
+
+    public ArticleService() {
+        articles = new ArrayList<>();
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
         articles.add(
                 new Article(
                         1,
                         "titre1",
                         "blabla",
+<<<<<<< HEAD
                         author
+=======
+                        new User("Bob", "Bobby", "bob@bobby.com")
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
                 )
         );
         articles.add(
@@ -28,7 +39,11 @@ public class ArticleService {
                         2,
                         "titre1",
                         "blabla",
+<<<<<<< HEAD
                         author
+=======
+                        new User("Bob", "Bobby", "bob@bobby.com")
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
                 )
         );
         articles.add(
@@ -36,7 +51,11 @@ public class ArticleService {
                         3,
                         "titre1",
                         "blabla",
+<<<<<<< HEAD
                         author
+=======
+                        new User("Bob", "Bobby", "bob@bobby.com")
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
                 )
         );
         articles.add(
@@ -44,7 +63,11 @@ public class ArticleService {
                         4,
                         "titre1",
                         "blabla",
+<<<<<<< HEAD
                         author
+=======
+                        new User("Bob", "Bobby", "bob@bobby.com")
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
                 )
         );
     }
@@ -66,7 +89,11 @@ public class ArticleService {
 
     public List<Article> getArticles() {
         return this.articles;
+<<<<<<< HEAD
 >>>>>>> 43bdeb1 (list all and create)
+=======
+>>>>>>> 43bdeb1485640fa613e1141783daaab204ec40c7
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
     }
 
     public void addArticle(Article article)
