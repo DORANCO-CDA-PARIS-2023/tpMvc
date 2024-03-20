@@ -19,6 +19,14 @@ nav {
 
 nav ul {
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 30px;
 }
 
 
@@ -41,4 +49,19 @@ main section div article {
 form {
     display: flex;
     flex-direction: column;
+}
+
+.formMessage {
+    color: whitesmoke;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.error {
+    background-color: darkred;
+}
+
+.success {
+    background-color: green;
 }

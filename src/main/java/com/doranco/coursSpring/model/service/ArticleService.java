@@ -10,16 +10,17 @@ import java.util.List;
 @Service
 public class ArticleService {
 
-    private final List<Article> articles;
+    private static final List<Article> articles = new ArrayList<>();;
 
     public ArticleService() {
-        articles = new ArrayList<>();
+       // articles =
+        var author = new User("Bob", "Bobby", "bob@bobby.com", "1234");
         articles.add(
                 new Article(
                         1,
                         "titre1",
                         "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com")
+                        author
                 )
         );
         articles.add(
@@ -27,7 +28,7 @@ public class ArticleService {
                         2,
                         "titre1",
                         "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com")
+                        author
                 )
         );
         articles.add(
@@ -35,7 +36,7 @@ public class ArticleService {
                         3,
                         "titre1",
                         "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com")
+                        author
                 )
         );
         articles.add(
@@ -43,7 +44,7 @@ public class ArticleService {
                         4,
                         "titre1",
                         "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com")
+                        author
                 )
         );
     }
