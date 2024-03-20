@@ -25,7 +25,7 @@
                 </label>
                 <tr th:each="article : ${articles}">
                     <td th:text="${article.id}">1</td>
-                    <td><a href="#" th:text="${article.title}">Title ...</a></td>
+                    <td><a href="/article" th:text="${article.title}">Title ...</a></td>
                     <td th:text="${article.author}">Text ...</td>
                 </tr>
             </form>
@@ -48,18 +48,34 @@
         </section>
 
         <section>
-            <!-- ADD ARTICLE  -->
-            <form method="post" action="/article">
-                <div>
-                    <label for="title">Title</label>
-                    <input id="title" type="text" name="title">
+            <div th:switch="${articles}">
+                <h2 th:case="null">No users yet!</h2>
+                <div th:case="*">
+                    <h2>Articles</h2>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="article : ${articles}">
+                            <td th:text="${article.title}"></td>
+                            <td th:text="${article.author}"></td>
+                            <td th:text="${article.content}"></td>
+                            <td><a th:href="@{/article/{id}(id=${article.id})}">Find by id</a></td>
+                            <td><a th:href="@{/article/{id}/delete(id=${article.id})}">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div>
-                    <label for="content">content</label>
-                    <textarea id="content" name="content"></textarea>
-                </div>
-                <button type="submit">ajouter</button>
-            </form>
+                <p><a href="/signup">Add a new user</a></p>
+            </div>
+            Copy
+            For simplicity’s sake, the
         </section>
     </main>
 </body>

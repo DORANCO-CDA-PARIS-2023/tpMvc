@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add user</title>
+</head>
+<body>
+<!--/*@thymesVar id="user" type="jakarta"*/-->
+<form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
+    <label for="name">Name</label>
+    <input id="name" placeholder="Name" th:field="*{user.name}" type="text">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{user.name}"></span>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{user.email}" id="email" placeholder="Email">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{user.email}"></span>
+    <input type="submit" value="Add User">
+</form>
+</body>
+</html>
+<!-- <form method="post" th:action="@{/article}" th:object="${user
+<input id="firstName" placeholder="Enter First Name" required type="text" th:field="*{user.firstName}"/>
+                   <input id="lastName" placeholder="Enter Last Name" required type="text"
+                          th:field="*{user.lastName}"/>
