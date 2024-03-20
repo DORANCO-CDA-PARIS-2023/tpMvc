@@ -12,12 +12,15 @@
 		<nav>
 			<ul>
 				<li><a href="/">Home</a></li>
+				<li th:if="${login == null}"><a href="/login">Login</a></li>
+				<li th:if="${login == null}"><a href="/register">Register</a></li>
+				<li th:if="${login != null}"><a href="/logout">Logout</a></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
 		
-		<h2 th:login="${login}" >Corrent Utilisateur</h2>
+		<h2 th:if="${login  != null}" th:text="${login}" >Corrent Utilisateur</h2>
 		
 		<section>
 			<div th:if="${articles != null}">
@@ -32,7 +35,7 @@
 			</div>
 		</section>
 
-		<section>
+		<section th:if="${login != null}">
 			<!-- ADD ARTICLE  -->
 			<form action="/create" method="post">
 				<!--<p>Id: <input type="text" name="id" /></p>-->

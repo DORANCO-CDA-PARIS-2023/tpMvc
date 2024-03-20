@@ -5,19 +5,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.doranco.coursSpring.enums.UserRoles;
 import com.doranco.coursSpring.model.entity.User;
 
 @Service
 public class UserService {
 	
-	private final List<User> users;
+	private static List<User> users;
 	
 	public UserService() {
         users = new ArrayList<>();
-        users.add(new User("Bob", "Bobby", "user_1", "1234", "bob@bobby.com"));
-        users.add(new User("Bob", "Bobby", "user_2", "1234", "bob@bobby.com"));
-        users.add(new User("Bob", "Bobby", "user_3", "1234", "bob@bobby.com"));
-        users.add(new User("Bob", "Bobby", "user_4", "1234", "bob@bobby.com"));
+        users.add(new User("Bob", "Bobby", "user_1", "1234", "bob@bobby.com", UserRoles.ADMIN));
+        users.add(new User("Bob", "Bobby", "user_2", "1234", "bob@bobby.com", UserRoles.MODERATOR));
+        users.add(new User("Bob", "Bobby", "user_3", "1234", "bob@bobby.com", UserRoles.USER));
+        users.add(new User("Bob", "Bobby", "user_4", "1234", "bob@bobby.com", UserRoles.USER));
 	}
 	
 	private int newID() {
@@ -49,7 +50,7 @@ public class UserService {
 		return null;
 	}
 	
-	public User getUerByEMail(String email) {
+	public static User getUerByEMail(String email) {
 		for (User user : users) {
 			if (user.getEmail().equals(email)) {
 				return user;

@@ -1,5 +1,7 @@
 package com.doranco.coursSpring.model.entity;
 
+import com.doranco.coursSpring.enums.UserRoles;
+
 public class User {
 
 	private int id;
@@ -8,26 +10,29 @@ public class User {
 	private String userName;
 	private String password;
 	private String email;
+	private UserRoles role;
 
 	public User() {
 	}
 
-	public User(int id, String lastName, String firstName, String userName, String password, String email) {
+	public User(int id, String lastName, String firstName, String userName, String password, String email, UserRoles role) {
 		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
+		this.role = role;
 	}
 
-	public User(String lastName, String firstName, String userName, String password, String email) {
+	public User(String lastName, String firstName, String userName, String password, String email, UserRoles role) {
 		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.userName = userName;
 		this.password = password;
 		this.email = email;
+		this.role = role;
 	}
 
 	public int getId() {
@@ -77,10 +82,18 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public UserRoles getRole() {
+		return role;
+	}
+	
+	public void setRole(UserRoles role) {
+		this.role = role;
+	}
 
 	@Override
 	public String toString() {
-		return "User [lastName=" + lastName + ", firstName=" + firstName + ", userName=" + userName + ", email=" + email
+		return "User [lastName=" + lastName + ", firstName=" + firstName + ", userName=" + userName + ", email=" + email + ", role=" + role
 				+ "]";
 	}
 
