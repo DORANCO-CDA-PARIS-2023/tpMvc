@@ -1,7 +1,12 @@
 package com.doranco.coursSpring.model.entity;
 
+import jakarta.persistence.*;
+
+@Entity @Table
 public class User {
 
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String lastName;
     private String firstName;
     private String email;
@@ -14,6 +19,14 @@ public class User {
         this.firstName = firstName;
         this.email = email;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLastName() {
@@ -51,6 +64,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
+                "id='" + id + '\'' +
                 "lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", email='" + email + '\'' +

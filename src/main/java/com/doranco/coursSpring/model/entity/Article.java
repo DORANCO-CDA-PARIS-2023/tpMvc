@@ -1,12 +1,17 @@
 package com.doranco.coursSpring.model.entity;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+@Entity @Table
 public class Article {
 
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String title;
     private String content;
+    @ManyToOne
     private User author;
 
     private LocalDateTime dateTime;
