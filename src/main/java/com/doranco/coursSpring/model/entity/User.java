@@ -2,6 +2,8 @@ package com.doranco.coursSpring.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity @Table
 public class User {
 
@@ -11,6 +13,10 @@ public class User {
     private String firstName;
     private String email;
     private String password;
+
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Article> articles;
 
     public User() {}
 
@@ -59,6 +65,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 
     @Override

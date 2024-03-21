@@ -1,8 +1,10 @@
 package com.doranco.coursSpring.model.service;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.doranco.coursSpring.model.entity.Auth.AuthForm;
 import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.exception.EmptyFormException;
+import com.doranco.coursSpring.model.service.exception.InvalidPasswordException;
 import com.doranco.coursSpring.model.service.exception.MismatchPasswordException;
 import com.doranco.coursSpring.model.service.exception.NotFoundUserException;
 import com.doranco.coursSpring.repository.UserRepository;
@@ -10,13 +12,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-
-    private final UserService userService;
     private final UserRepository userRepository;
 
-    public AuthService(UserService userService, UserRepository userRepository)
+    public AuthService(UserRepository userRepository)
     {
-        this.userService = userService;
         this.userRepository = userRepository;
     }
 
@@ -41,24 +40,29 @@ public class AuthService {
 
     public void register(AuthForm formData) throws MismatchPasswordException, EmptyFormException {
         checkRegister(formData);
+        String passwordHashed = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, formData.getPassword().toCharArray());
         User newUser = new User(
                 formData.getLastName(),
                 formData.getFirstName(),
                 formData.getEmail(),
-                formData.getPassword()
+                passwordHashed
         );
-        userService.add(newUser);
-
         userRepository.save(newUser);
     }
 
-    public User login(AuthForm formData) throws EmptyFormException, NotFoundUserException {
+    public User login(AuthForm formData) throws EmptyFormException, NotFoundUserException, InvalidPasswordException {
         if (formData.getPassword().isEmpty() || formData.getEmail().isEmpty()) {
             throw new EmptyFormException("Login form fields empty");
         }
-        User user = userService.findByEmailAndPassword(formData.getEmail(), formData.getPassword());
+        User user = userRepository.findByEmail(formData.getEmail());
         if (user == null) {
             throw new NotFoundUserException("");
+        }
+        BCrypt.Result result = BCrypt.verifyer().verify(
+                formData.getPassword().toCharArray(),
+                user.getPassword().toCharArray());
+        if (!result.verified) {
+            throw new InvalidPasswordException();
         }
         return user;
     }

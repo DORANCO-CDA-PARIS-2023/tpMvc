@@ -1,7 +1,9 @@
 package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.model.entity.Article;
+import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.ArticleService;
+import com.doranco.coursSpring.repository.ArticleRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,12 +15,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class ArticleController {
+    private final ArticleRepository articleRepository;
 
-    private final ArticleService articleService;
-
-    public ArticleController(ArticleService articleService)
+    public ArticleController(ArticleRepository articleRepository)
     {
-        this.articleService = articleService;
+        this.articleRepository = articleRepository;
     }
 
 
@@ -33,17 +34,20 @@ public class ArticleController {
         if (session.getAttribute("user") == null) {
             return "redirect:/login";
         }
-        var articles = this.articleService.getArticles();
+        var articles = this.articleRepository.findAll();
         model.addAttribute("articles", articles);
         return "index";
     }
 
     @PostMapping("/article")
     public RedirectView addArticle(@ModelAttribute Article article, HttpSession session) {
-        if (session.getAttribute("user") == null) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
             return new RedirectView("/login");
         }
-        articleService.addArticle(article);
+        //TODO CHECK FIELDS
+        article.setAuthor(user);
+        articleRepository.save(article);
         return new RedirectView("/article");
     }
 
@@ -52,7 +56,7 @@ public class ArticleController {
         if (session.getAttribute("user") == null) {
             return "redirect:/login";
         }
-        Article article = articleService.getArticle(id);
+        Article article = articleRepository.findById(id).get();
         model.addAttribute("article", article);
         return "article";
     }
@@ -60,11 +64,9 @@ public class ArticleController {
 
     @GetMapping("/article/{id}/delete")
     public RedirectView deteteArticle(@PathVariable int id) {
-        articleService.deleteArticle(id);
+        articleRepository.deleteById(id);
         return new RedirectView("/article");
     }
 
 }
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class NotFoundException extends Exception {}
