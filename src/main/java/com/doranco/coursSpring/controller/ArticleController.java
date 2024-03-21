@@ -28,7 +28,7 @@ public class ArticleController {
     @GetMapping("/article")
     public String listArticles(Model model, HttpSession session) {
         if (session.getAttribute("login") == null) {
-            return "redirect:/login";
+            return "redirect:/login?redirect=/article";
         }
 
         List<Article> articles = this.articleService.getArticles();
@@ -65,7 +65,7 @@ public class ArticleController {
     @GetMapping("/article/add")
     public String addArticle(Model model, HttpSession session) {
         if (session.getAttribute("login") == null) {
-            return "redirect:/login";
+            return "redirect:/login?redirect=/article/add";
         }
 
         model.addAttribute("login", session.getAttribute("login"));
@@ -95,7 +95,7 @@ public class ArticleController {
     @GetMapping("/article/{id}/modify")
     public String modifyArticle(@PathVariable int id, Model model, HttpSession session) {
         if (session.getAttribute("login") == null) {
-            return "redirect:/login";
+            return "redirect:/login?redirect=/article/" + id + "/modify";
         }
 
         model.addAttribute("article", articleService.getArticle(id).isEmpty() ? null : articleService.getArticle(id).get() );
