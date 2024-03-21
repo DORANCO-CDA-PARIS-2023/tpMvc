@@ -18,7 +18,6 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class AuthController {
 
-
     private final AuthService authService;
 
     public AuthController(AuthService authService)
