@@ -1,82 +1,76 @@
 package com.doranco.coursSpring.controller;
 
-<<<<<<< HEAD
-=======
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.entity.User;
->>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
 import com.doranco.coursSpring.model.service.ArticleService;
+import com.doranco.coursSpring.repository.ArticleRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class ArticleController {
+    private final ArticleRepository articleRepository;
 
-    private final ArticleService articleService;
-
-    public ArticleController(ArticleService articleService)
+    public ArticleController(ArticleRepository articleRepository)
     {
-        this.articleService = articleService;
+        this.articleRepository = articleRepository;
     }
 
 
-<<<<<<< HEAD
     @GetMapping("/")
     public RedirectView home() {
         return new RedirectView("/article");
     }
 
     @GetMapping("/article")
-=======
-    @GetMapping("/show")
->>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
-    public String listArticles(Model model) {
-        var articles = this.articleService.getArticles();
+    public String listArticles(Model model, HttpSession session)
+    {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+        var articles = this.articleRepository.findAll();
         model.addAttribute("articles", articles);
         return "index";
     }
 
-<<<<<<< HEAD
     @PostMapping("/article")
-    public String addArticle() {
-        return "index";
-=======
-    @PostMapping("/addarticle")
-    public RedirectView addArticle(@ModelAttribute Article article) {
-
-        articleService.addArticle(article);
+    public RedirectView addArticle(@ModelAttribute Article article, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return new RedirectView("/login");
+        }
+        //TODO CHECK FIELDS
+        article.setAuthor(user);
+        articleRepository.save(article);
         return new RedirectView("/article");
->>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
     }
-
-    @GetMapping("/signup")
-    public String showSignUpForm(Model model) {
-        User  user=new User();
-         model.addAttribute(user);
-        return "add-user";
-    }
-
 
     @GetMapping("/article/{id}")
-    public String getArticle(@PathVariable int id, Model model) {
-        Article article = articleService.getArticle(id);
+    public String getArticle(@PathVariable int id, Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
+        Article article = articleRepository.findById(id).get();
         model.addAttribute("article", article);
         return "article";
     }
 
 
     @GetMapping("/article/{id}/delete")
-    public RedirectView deteteArticle(@PathVariable int id) {
+<<<<<<< HEAD
+    public RedirectView deleteArticle(@PathVariable int id) {
         articleService.deleteArticle(id);
+=======
+    public RedirectView deteteArticle(@PathVariable int id) {
+        articleRepository.deleteById(id);
+>>>>>>> 9237d41 (add Bcrypt to login process)
         return new RedirectView("/article");
     }
 
 }
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-class NotFoundException extends Exception {}
