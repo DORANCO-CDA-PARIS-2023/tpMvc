@@ -37,7 +37,14 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public RedirectView addArticle(@ModelAttribute Article article, HttpSession session) throws UnauthorizedException {
+    public RedirectView addArticle(@ModelAttribute Article article,
+                                   HttpSession session,
+                                   @RequestParam(
+                                           value = "redirect",
+                                           defaultValue = "/my-articles",
+                                           required = false
+                                   ) String redirect) throws UnauthorizedException {
+
         Object loginAttribut = session.getAttribute("login");
         if (loginAttribut == null) {
             throw new UnauthorizedException();
@@ -47,7 +54,7 @@ public class ArticleController {
         article.setUser(user);
 
         this.articleService.addArticle(article);
-        return new RedirectView("/article");
+        return new RedirectView(redirect);
     }
 
     @GetMapping("/article/{id}")
@@ -63,12 +70,15 @@ public class ArticleController {
     }
 
     @GetMapping("/article/add")
-    public String addArticle(Model model, HttpSession session) {
+    public String addArticle(Model model,
+                             HttpSession session,
+                             @RequestParam(value = "redirect", required = false) String redirect) {
         if (session.getAttribute("login") == null) {
             return "redirect:/login?redirect=/article/add";
         }
 
         model.addAttribute("login", session.getAttribute("login"));
+        model.addAttribute("redirect", redirect);
 
         return "article/addArticle";
     }
@@ -101,6 +111,18 @@ public class ArticleController {
         model.addAttribute("article", articleService.getArticle(id).isEmpty() ? null : articleService.getArticle(id).get() );
 
         return "article/modifyArticle";
+    }
+
+    @GetMapping("/my-articles")
+    public String myArticles(HttpSession session, Model model) {
+        if (session.getAttribute("login") == null) {
+            return "redirect:/login?redirect=/my-articles";
+        }
+
+        User user = (User) session.getAttribute("login");
+        List<Article> articlesByUser = this.articleService.getArticlesByUser(user);
+        model.addAttribute("articles", articlesByUser);
+        return "user/my-articles";
     }
 
 }

@@ -12,7 +12,7 @@
 <main>
     <section>
         <!-- ADD ARTICLE  -->
-        <form th:action="@{/article}" method="post">
+        <form th:action="@{'/article' + ${redirect != null ? '?redirect=' + redirect : ''}}" method="post">
             <label for="article-title">Entrez le titre de l'article</label>
             <input id="article-title" type="text" name="title">
 

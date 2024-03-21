@@ -10,6 +10,9 @@
     <div th:replace="~{fragments/header :: header}"></div>
     <main>
         <section>
+            <h1 th:if="${articles.isEmpty()}">
+                Vous n'avez pas encore d'articles 😟 ! Cliquez <a th:href="@{'/article/add'}">ici</a> pour en créer un.
+            </h1>
             <ul>
                 <li th:each="article : ${articles}">
                     <a th:text="${article.title}" th:href="@{'/article/' + ${article.id}}">Article link</a>

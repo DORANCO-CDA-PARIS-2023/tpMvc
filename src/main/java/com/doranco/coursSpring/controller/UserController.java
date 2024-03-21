@@ -22,16 +22,4 @@ public class UserController {
         this.articleService = articleService;
     }
 
-    @GetMapping("/my-articles")
-    public String myArticles(HttpSession session, Model model) {
-        if (session.getAttribute("login") == null) {
-            return "redirect:/login?redirect=/my-articles";
-        }
-
-        User user = (User) session.getAttribute("login");
-        List<Article> articlesByUser = this.articleService.getArticlesByUser(user);
-        model.addAttribute("articles", articlesByUser);
-        return "user/my-articles";
-    }
-
 }
