@@ -25,7 +25,7 @@ public class UserController {
     @GetMapping("/my-articles")
     public String myArticles(HttpSession session, Model model) {
         if (session.getAttribute("login") == null) {
-            return "redirect:/";
+            return "redirect:/login";
         }
 
         User user = (User) session.getAttribute("login");

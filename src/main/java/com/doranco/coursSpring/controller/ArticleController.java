@@ -25,12 +25,6 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping("/")
-    public RedirectView home() {
-        return new RedirectView("/article");
-    }
-
-
     @GetMapping("/article")
     public String listArticles(Model model, HttpSession session) {
         if (session.getAttribute("login") == null) {
