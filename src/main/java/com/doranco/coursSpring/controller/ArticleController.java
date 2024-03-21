@@ -2,6 +2,7 @@ package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -27,20 +28,30 @@ public class ArticleController {
     }
 
     @GetMapping("/article")
-    public String listArticles(Model model) {
+    public String listArticles(Model model, HttpSession session)
+    {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
         var articles = this.articleService.getArticles();
         model.addAttribute("articles", articles);
         return "index";
     }
 
     @PostMapping("/article")
-    public RedirectView addArticle(@ModelAttribute Article article) {
+    public RedirectView addArticle(@ModelAttribute Article article, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return new RedirectView("/login");
+        }
         articleService.addArticle(article);
         return new RedirectView("/article");
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle(@PathVariable int id, Model model) {
+    public String getArticle(@PathVariable int id, Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
         Article article = articleService.getArticle(id);
         model.addAttribute("article", article);
         return "article";

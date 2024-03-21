@@ -5,16 +5,19 @@ import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.exception.EmptyFormException;
 import com.doranco.coursSpring.model.service.exception.MismatchPasswordException;
 import com.doranco.coursSpring.model.service.exception.NotFoundUserException;
+import com.doranco.coursSpring.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
 
     private final UserService userService;
+    private final UserRepository userRepository;
 
-    public AuthService(UserService userService)
+    public AuthService(UserService userService, UserRepository userRepository)
     {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     private void checkRegister(AuthForm formData) throws MismatchPasswordException, EmptyFormException
@@ -45,7 +48,8 @@ public class AuthService {
                 formData.getPassword()
         );
         userService.add(newUser);
-        System.out.println(userService.getUserList().size());
+
+        userRepository.save(newUser);
     }
 
     public User login(AuthForm formData) throws EmptyFormException, NotFoundUserException {
