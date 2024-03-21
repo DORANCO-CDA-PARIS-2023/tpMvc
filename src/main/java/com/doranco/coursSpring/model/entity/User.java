@@ -1,6 +1,9 @@
 package com.doranco.coursSpring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity @Table
 public class User {
@@ -10,7 +13,14 @@ public class User {
     private String lastName;
     private String firstName;
     private String email;
+
+    @JsonIgnore
     private String password;
+
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Article> articles;
 
     public User() {}
 
@@ -59,6 +69,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 
     @Override

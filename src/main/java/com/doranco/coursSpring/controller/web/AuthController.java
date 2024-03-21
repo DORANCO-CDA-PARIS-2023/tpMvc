@@ -1,10 +1,11 @@
-package com.doranco.coursSpring.controller;
+package com.doranco.coursSpring.controller.web;
 
 import com.doranco.coursSpring.model.entity.Auth.AuthForm;
 import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.AuthService;
 import com.doranco.coursSpring.model.service.UserService;
 import com.doranco.coursSpring.model.service.exception.EmptyFormException;
+import com.doranco.coursSpring.model.service.exception.InvalidPasswordException;
 import com.doranco.coursSpring.model.service.exception.MismatchPasswordException;
 import com.doranco.coursSpring.model.service.exception.NotFoundUserException;
 import jakarta.servlet.http.HttpSession;
@@ -42,11 +43,12 @@ public class AuthController {
             User user = authService.login(loginForm);
             session.setAttribute("user", user);
             return "redirect:/article";
-            //model.addAttribute("success", "Connexion validé ! ");
         } catch (EmptyFormException e) {
             model.addAttribute("error", "Les champs sont obligatoires !");
         } catch (NotFoundUserException e) {
             model.addAttribute("error", "Identifiants invalide");
+        } catch (InvalidPasswordException e) {
+            model.addAttribute("error", "Mauvais mot de passe !");
         }
         return "auth/login";
     }
