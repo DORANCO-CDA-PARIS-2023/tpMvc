@@ -11,7 +11,7 @@
 <div th:replace="~{fragments/header :: header}"></div>
 <main>
     <section>
-        <form action="/register" method="post">
+        <form th:action="@{'/register' + ${redirect != null ? '?redirect=' + redirect : ''}}" method="post">
             <div th:if="${error != null}">
                 <p th:text="'⚠️ ' + ${error}">Erreur</p>
             </div>
@@ -34,7 +34,7 @@
             <button type="submit">Inscription</button>
         </form>
         <p>
-            Déja un compte ? Cliquez <a th:href="@{'/login'}">ici</a> !
+            Déja un compte ? Cliquez <a th:href="@{'/login' + ${redirect != null ? '?redirect=' + redirect : ''}}">ici</a> !
         </p>
     </section>
 </main>

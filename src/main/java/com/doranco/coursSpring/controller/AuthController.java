@@ -28,17 +28,22 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute RegisterForm registerForm, Model model, HttpSession session) {
+    public String register(@ModelAttribute RegisterForm registerForm,
+                           Model model,
+                           HttpSession session,
+                           @RequestParam(value = "redirect", defaultValue = "/", required = false) String redirect) {
         if (session.getAttribute("login") != null) {
-            return "redirect:/";
+            return "redirect:" + redirect;
         }
 
         try {
             this.authService.register(registerForm);
-            return "redirect:/login";
+            return "redirect:" + redirect;
         } catch (IncompleteFormException | AlreadyRegisteredException | MissMatchPasswordException e) {
             model.addAttribute("error", e.getMessage());
         }
+
+        model.addAttribute("redirect", redirect);
 
         return "auth/register";
     }
@@ -60,7 +65,9 @@ public class AuthController {
             model.addAttribute("error", e.getMessage());
         }
 
-        return redirect.equals("/") ? "auth/login": "redirect:/login?redirect=" + redirect;
+        model.addAttribute("redirect", redirect);
+
+        return "auth/login";
     }
 
     @GetMapping("/logout")
@@ -79,8 +86,11 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String getuserRegister(Model model, HttpSession session) {
+    public String getuserRegister(Model model,
+                                  HttpSession session,
+                                  @RequestParam(value = "redirect", required = false) String redirect) {
         model.addAttribute("login", session.getAttribute("login"));
+        model.addAttribute("redirect", redirect);
         return "auth/register";
     }
 
