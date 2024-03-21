@@ -12,6 +12,7 @@ public class Article {
     private String title;
     private String content;
     @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
     private LocalDateTime dateTime;
