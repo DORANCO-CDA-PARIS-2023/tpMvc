@@ -1,4 +1,4 @@
-package com.doranco.coursSpring.controller;
+package com.doranco.coursSpring.controller.web;
 
 import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.exception.AlreadyRegisteredException;
@@ -31,7 +31,7 @@ public class AuthController {
     public String register(@ModelAttribute RegisterForm registerForm,
                            Model model,
                            HttpSession session,
-                           @RequestParam(value = "redirect", defaultValue = "/", required = false) String redirect) {
+                           @RequestParam(value = "redirect", defaultValue = "/login", required = false) String redirect) {
         if (session.getAttribute("login") != null) {
             return "redirect:" + redirect;
         }

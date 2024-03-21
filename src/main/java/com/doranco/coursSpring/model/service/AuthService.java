@@ -1,5 +1,6 @@
 package com.doranco.coursSpring.model.service;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.exception.AlreadyRegisteredException;
 import com.doranco.coursSpring.model.exception.IncompleteFormException;
@@ -47,11 +48,13 @@ public class AuthService {
             throw new MissMatchPasswordException("Les mots de passes ne sont pas identiques.");
         }
 
+        String hashedPassword = BCrypt.withDefaults().hashToString(BCrypt.MIN_COST, registerForm.getPassword().toCharArray());
+
         User user = new User();
         user.setLastName(registerForm.getLastName());
         user.setFirstName(registerForm.getFirstName());
         user.setEmail(registerForm.getEmail());
-        user.setPassword(registerForm.getPassword());
+        user.setPassword(hashedPassword);
         this.userService.addUser(user);
     }
 
@@ -69,7 +72,11 @@ public class AuthService {
             throw new InvalidLoginException("L'utilisateur n'existe pas.");
         }
 
-        if (!userByEmail.get().getPassword().equals(loginForm.getPassword())) {
+        BCrypt.Result result = BCrypt.verifyer().verify(
+                loginForm.getPassword().toCharArray(),
+                userByEmail.get().getPassword().toCharArray());
+
+        if (!result.verified) {
             throw new InvalidLoginException("Mot de passe incorrect.");
         }
 

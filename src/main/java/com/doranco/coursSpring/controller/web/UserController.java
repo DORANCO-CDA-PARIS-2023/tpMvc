@@ -1,4 +1,4 @@
-package com.doranco.coursSpring.controller;
+package com.doranco.coursSpring.controller.web;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.entity.User;

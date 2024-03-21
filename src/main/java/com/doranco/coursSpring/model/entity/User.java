@@ -1,5 +1,6 @@
 package com.doranco.coursSpring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ public class User {
     @Column(length = 100, nullable = false, name = "email")
     private String email;
     @Column(nullable = false, name = "password")
+    @JsonIgnore
     private String password;
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Article> articles;
 
 
