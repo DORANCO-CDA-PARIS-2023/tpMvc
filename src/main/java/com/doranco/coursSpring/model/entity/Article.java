@@ -1,33 +1,35 @@
 package com.doranco.coursSpring.model.entity;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "article")
 public class Article {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(nullable = false, name = "title")
     private String title;
+    @Column(columnDefinition = "TEXT", name = "content")
     private String content;
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "user_id")
     private User author;
-
-    private LocalDateTime dateTime;
+    @Column(nullable = false, name = "creation_date")
+    private LocalDateTime creationDate;
 
     public Article() {
-        this.dateTime = LocalDateTime.now();
+        this.creationDate = LocalDateTime.now();
     }
 
-    public Article(int id, String title, String content, User author) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.author = author;
-        this.dateTime = LocalDateTime.now();
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -55,12 +57,12 @@ public class Article {
         this.author = author;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setCreationDate(LocalDateTime dateTime) {
+        this.creationDate = dateTime;
     }
 
     @Override
@@ -70,7 +72,7 @@ public class Article {
                 "title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", author=" + author +
-                ", dateTime=" + dateTime +
+                ", dateTime=" + creationDate +
                 '}';
     }
 }

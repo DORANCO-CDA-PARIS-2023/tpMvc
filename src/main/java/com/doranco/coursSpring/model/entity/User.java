@@ -1,28 +1,31 @@
 package com.doranco.coursSpring.model.entity;
 
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "user")
 public class User {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(length = 30, nullable = false, name = "lastname")
     private String lastName;
+    @Column(length = 30, nullable = false, name = "firstname")
     private String firstName;
+    @Column(length = 100, nullable = false, name = "email")
     private String email;
+    @Column(nullable = false, name = "password")
     private String password;
+    @OneToMany(mappedBy = "author")
+    private List<Article> articles;
 
-    public User() {}
 
-    public User(String lastName, String firstName, String email, String password) {
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(int id, String lastName, String firstName, String email, String password) {
-        this.id = id;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.email = email;
-        this.password = password;
+    public User() {
+        this.articles = new ArrayList<>();
     }
 
     public String getLastName() {
@@ -57,12 +60,16 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
     }
 
     @Override

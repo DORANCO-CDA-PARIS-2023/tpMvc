@@ -1,53 +1,34 @@
 package com.doranco.coursSpring.model.service;
 
 import com.doranco.coursSpring.model.entity.Article;
-import com.doranco.coursSpring.model.entity.User;
-import jakarta.annotation.Nullable;
+import com.doranco.coursSpring.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ArticleService {
 
-    private final List<Article> articles;
-    private int idCount;
+    private ArticleRepository articleRepository;
 
-    public ArticleService() {
-        this.idCount = 1;
-        articles = new ArrayList<>();
-        articles.add(
-                new Article(
-                        this.idCount++,
-                        "Article de Bob",
-                        "blabla",
-                        new User("Bob", "Bobby", "bob@bobby.com", "pass")
-                )
-        );
+    public ArticleService(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
     }
 
-    public int addArticle(Article article) {
-        article.setId(this.idCount++);
-        this.articles.add(article);
-
-        return article.getId();
+    public void addArticle(Article article) {
+        articleRepository.save(article);
     }
 
     public List<Article> getArticles() {
-        return this.articles;
+        return articleRepository.findAll();
     }
 
-    public Optional<Article> getArticle(int id) {
-        return this.articles
-                .stream()
-                .filter(a -> a.getId() == id)
-                .findFirst();
+    public Optional<Article> getArticle(Integer id) {
+        return articleRepository.findById(id);
     }
 
-    public void deleteArticle(int id) {
-        Optional<Article> article = this.getArticle(id);
-        article.ifPresent(this.articles::remove);
+    public void deleteArticle(Integer id) {
+        articleRepository.deleteById(id);
     }
 }

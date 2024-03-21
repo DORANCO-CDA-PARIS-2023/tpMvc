@@ -47,12 +47,12 @@ public class AuthService {
             throw new MissMatchPasswordException("Les mots de passes ne sont pas identiques.");
         }
 
-        this.userService.addUser(new User(
-                registerForm.getLastName(),
-                registerForm.getFirstName(),
-                registerForm.getEmail(),
-                registerForm.getPassword()
-        ));
+        User user = new User();
+        user.setLastName(registerForm.getLastName());
+        user.setFirstName(registerForm.getFirstName());
+        user.setEmail(registerForm.getEmail());
+        user.setPassword(registerForm.getPassword());
+        this.userService.addUser(user);
     }
 
     private void checkLoginForm(LoginForm loginForm) throws IncompleteFormException {
