@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private static final List<User> userList = new ArrayList<>();;
+    private static final List<User> userList = new ArrayList<>();
 
     public UserService()
     {
@@ -32,7 +32,7 @@ public class UserService {
         userList.remove(user);
     }
 
-    public User findByEmailAndPassword(String email, String password)
+    public User findByEmailAndPch(String email, String password)
     {
         for(User user : userList)
         {

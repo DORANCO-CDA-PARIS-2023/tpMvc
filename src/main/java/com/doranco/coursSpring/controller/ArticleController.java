@@ -2,6 +2,7 @@ package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
+import com.doranco.coursSpring.repository.ArticleRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,14 +12,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Optional;
+
 @Controller
 public class ArticleController {
 
-    private final ArticleService articleService;
 
-    public ArticleController(ArticleService articleService)
+    private final ArticleRepository articleRepository;
+
+    public ArticleController(ArticleRepository articleRepository)
     {
-        this.articleService = articleService;
+
+        this.articleRepository = articleRepository;
     }
 
 
@@ -33,7 +38,7 @@ public class ArticleController {
         if (session.getAttribute("user") == null) {
             return "redirect:/login";
         }
-        var articles = this.articleService.getArticles();
+        var articles = this.articleRepository.findAll();
         model.addAttribute("articles", articles);
         return "index";
     }
@@ -43,7 +48,7 @@ public class ArticleController {
         if (session.getAttribute("user") == null) {
             return new RedirectView("/login");
         }
-        articleService.addArticle(article);
+        articleRepository.save(article);
         return new RedirectView("/article");
     }
 
@@ -52,15 +57,20 @@ public class ArticleController {
         if (session.getAttribute("user") == null) {
             return "redirect:/login";
         }
-        Article article = articleService.getArticle(id);
-        model.addAttribute("article", article);
-        return "article";
+        Optional<Article> optionalArticle = articleRepository.findById(id);
+        if (optionalArticle.isPresent()) {
+            Article article = optionalArticle.get();
+            model.addAttribute("article", article);
+            return "article";
+        } else {
+            return null;
+        }
     }
 
 
     @GetMapping("/article/{id}/delete")
     public RedirectView deteteArticle(@PathVariable int id) {
-        articleService.deleteArticle(id);
+        articleRepository.deleteById(id);
         return new RedirectView("/article");
     }
 

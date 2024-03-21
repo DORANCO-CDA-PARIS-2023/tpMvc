@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
-    private final UserService userService;
+
     private final UserRepository userRepository;
 
-    public AuthService(UserService userService, UserRepository userRepository)
+    public AuthService( UserRepository userRepository)
     {
-        this.userService = userService;
+
         this.userRepository = userRepository;
     }
 
@@ -47,8 +47,6 @@ public class AuthService {
                 formData.getEmail(),
                 formData.getPassword()
         );
-        userService.add(newUser);
-
         userRepository.save(newUser);
     }
 
@@ -56,7 +54,7 @@ public class AuthService {
         if (formData.getPassword().isEmpty() || formData.getEmail().isEmpty()) {
             throw new EmptyFormException("Login form fields empty");
         }
-        User user = userService.findByEmailAndPassword(formData.getEmail(), formData.getPassword());
+        User user = userRepository.findByEmailAndPassword(formData.getEmail(), formData.getPassword());
         if (user == null) {
             throw new NotFoundUserException("");
         }
