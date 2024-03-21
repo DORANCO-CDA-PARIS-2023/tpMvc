@@ -2,14 +2,12 @@ package com.doranco.coursSpring.controller;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.service.ArticleService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -29,19 +27,30 @@ public class ArticleController {
     }
 
     @GetMapping("/article")
-    public String listArticles(Model model) {
+    public String listArticles(Model model, HttpSession session)
+    {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
         var articles = this.articleService.getArticles();
         model.addAttribute("articles", articles);
         return "index";
     }
 
     @PostMapping("/article")
-    public String addArticle() {
-        return "index";
+    public RedirectView addArticle(@ModelAttribute Article article, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return new RedirectView("/login");
+        }
+        articleService.addArticle(article);
+        return new RedirectView("/article");
     }
 
     @GetMapping("/article/{id}")
-    public String getArticle(@PathVariable int id, Model model) {
+    public String getArticle(@PathVariable int id, Model model, HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            return "redirect:/login";
+        }
         Article article = articleService.getArticle(id);
         model.addAttribute("article", article);
         return "article";
@@ -49,7 +58,7 @@ public class ArticleController {
 
 
     @GetMapping("/article/{id}/delete")
-    public RedirectView deteteArticle(@PathVariable int id) {
+    public RedirectView deleteArticle(@PathVariable int id) {
         articleService.deleteArticle(id);
         return new RedirectView("/article");
     }

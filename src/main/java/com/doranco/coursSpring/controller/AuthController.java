@@ -13,10 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class AuthController {
-
 
     private final AuthService authService;
 
@@ -27,22 +27,22 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public String login()
+    public String login(HttpSession session)
     {
+        if (session.getAttribute("user") != null) {
+            return "redirect:/article";
+        }
         return "auth/login";
     }
 
     @PostMapping("/login")
     public String toLogin(@ModelAttribute AuthForm loginForm, Model model, HttpSession session)
     {
-        if (session.getAttribute("user") != null) {
-            model.addAttribute("error", "Already connected !!!");
-            return "auth/login";
-        }
         try {
             User user = authService.login(loginForm);
             session.setAttribute("user", user);
-            model.addAttribute("success", "Connexion validé ! ");
+            return "redirect:/article";
+            //model.addAttribute("success", "Connexion validé ! ");
         } catch (EmptyFormException e) {
             model.addAttribute("error", "Les champs sont obligatoires !");
         } catch (NotFoundUserException e) {
@@ -52,8 +52,11 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String register()
+    public String register(HttpSession session)
     {
+        if (session.getAttribute("user") != null) {
+            return "redirect:/";
+        }
         return "auth/register";
     }
 
@@ -70,5 +73,12 @@ public class AuthController {
         }
 
         return "auth/register";
+    }
+
+    @GetMapping("/logout")
+    public RedirectView logout(HttpSession session)
+    {
+        session.removeAttribute("user");
+        return new RedirectView("/");
     }
 }

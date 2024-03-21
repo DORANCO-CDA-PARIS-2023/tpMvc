@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Article CRUD Spring MVC</title>
+    <title>Cours SPRING</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
@@ -10,71 +10,40 @@
         <nav>
             <ul>
                 <li><a href="">Home</a></li>
-                <li><a href="/login">Connection</a></li>
-                <li><a href="/register">register</a></li>
+                <li th:if="${#ctx.session.get('user') == null}"><a href="/login">Connection</a></li>
+                <li th:if="${#ctx.session.get('user') == null}"><a href="/register">register</a></li>
+                <li th:if="${#ctx.session.get('user') != null}"><a href="/logout">logout</a></li>
             </ul>
         </nav>
     </header>
     <main>
+
+        <div th:text="${#ctx.session.size()}">
+        </div>
+
         <section>
-
-            <!--/*@thymesVar id="article" type="jakarta"*/-->
-            <form method="get" th:object="${articles}" th:action="@{/article}">
-                <label>
-                    List:
-                </label>
-                <tr th:each="article : ${articles}">
-                    <td th:text="${article.id}">1</td>
-                    <td><a href="/article" th:text="${article.title}">Title ...</a></td>
-                    <td th:text="${article.author}">Text ...</td>
-                </tr>
-            </form>
-
-
-
-               <!-- <form method="post" th:action="@{/article}" th:object="${user}">
-                    <input id="firstName" placeholder="Enter First Name" required type="text" th:field="*{user.firstName}"/>
-                    <input id="lastName" placeholder="Enter Last Name" required type="text"
-                           th:field="*{user.lastName}"/>
-                    <input type="submit" value="Create User" th:field="*{article.author}"/> </form>-->
-                <!--    <form method="post" th:action="@{/article}" th:object="${article}">
-                    <input id="id" placeholder="enter id" required type="text" th:field="*{article.id}"/>
-                    <input id="title" placeholder="enter title" required type="text" th:field="*{article.title}"/>
-                    <input type="submit" value="Create article">
-
-                    </form>-->
-
-
+            <!-- ALL ARTICLE LIST -->
+            <div>
+                <article th:each="article: ${articles}">
+                    <h2 th:text="${article.title}">Title article</h2>
+                    <a th:href="@{'/article/' + ${article.id} }">Link to article</a>
+                </article>
+            </div>
         </section>
 
         <section>
-            <div th:switch="${articles}">
-                <h2 th:case="null">No users yet!</h2>
-                <div th:case="*">
-                    <h2>Articles</h2>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="article : ${articles}">
-                            <td th:text="${article.title}"></td>
-                            <td th:text="${article.author}"></td>
-                            <td th:text="${article.content}"></td>
-                            <td><a th:href="@{/article/{id}(id=${article.id})}">Find by id</a></td>
-                            <td><a th:href="@{/article/{id}/delete(id=${article.id})}">Delete</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <!-- ADD ARTICLE  -->
+            <form method="post" action="/article">
+                <div>
+                    <label for="title">Title</label>
+                    <input id="title" type="text" name="title">
                 </div>
-                <p><a href="/register">Add a new user</a></p>
-            </div>
-            New Methods
+                <div>
+                    <label for="content">content</label>
+                    <textarea id="content" name="content"></textarea>
+                </div>
+                <button type="submit">ajouter</button>
+            </form>
         </section>
     </main>
 </body>
