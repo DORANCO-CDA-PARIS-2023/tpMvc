@@ -1,5 +1,6 @@
 package com.doranco.coursSpring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,10 +13,13 @@ public class User {
     private String lastName;
     private String firstName;
     private String email;
+
+    @JsonIgnore
     private String password;
 
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Article> articles;
 
     public User() {}

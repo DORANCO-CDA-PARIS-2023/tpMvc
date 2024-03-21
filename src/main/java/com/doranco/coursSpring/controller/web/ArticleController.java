@@ -1,12 +1,9 @@
-package com.doranco.coursSpring.controller;
+package com.doranco.coursSpring.controller.web;
 
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.entity.User;
-import com.doranco.coursSpring.model.service.ArticleService;
 import com.doranco.coursSpring.repository.ArticleRepository;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;

@@ -1,5 +1,6 @@
 package com.doranco.coursSpring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -21,8 +22,7 @@ public class Article {
         this.dateTime = LocalDateTime.now();
     }
 
-    public Article(int id, String title, String content, User author) {
-        this.id = id;
+    public Article(String title, String content, User author) {
         this.title = title;
         this.content = content;
         this.author = author;
