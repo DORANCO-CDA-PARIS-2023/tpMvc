@@ -1,6 +1,7 @@
 package com.doranco.coursSpring.model.service;
 
 import com.doranco.coursSpring.model.entity.Article;
+import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class ArticleService {
 
     public List<Article> getArticles() {
         return articleRepository.findAll();
+    }
+
+    public List<Article> getArticlesByUser(User user) {
+        return articleRepository.findAllByUser(user);
     }
 
     public Optional<Article> getArticle(Integer id) {

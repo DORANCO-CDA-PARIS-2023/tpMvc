@@ -14,15 +14,15 @@
             <h1 th:text="${article.title}">Article Titre</h1>
             <p th:text="${article.content}">Article Contenu</p>
             <footer>
-                <p th:text="'Posté par ' + ${article.getAuthor().getFirstName()} + ' ' + ${article.getAuthor().getLastName()}">
+                <p th:text="'Posté par ' + ${article.getUser().getFirstName()} + ' ' + ${article.getUser().getLastName()}">
                     Posté par User Firstname User Lastname
                 </p>
                 <a
-                        th:if="${#ctx.session.get('login') != null && #ctx.session.get('login').getId() == article.getAuthor().getId()}"
+                        th:if="${#ctx.session.get('login') != null && #ctx.session.get('login').getId() == article.getUser().getId()}"
                         th:href="'/article/' + ${article.id} + '/modify'"
                 >📝Modifier</a>
                 <a
-                        th:if="${#ctx.session.get('login') != null && #ctx.session.get('login').getId() == article.getAuthor().getId()}"
+                        th:if="${#ctx.session.get('login') != null && #ctx.session.get('login').getId() == article.getUser().getId()}"
                         th:href="'/article/' + ${article.id} + '/delete'"
                 >🗑️Supprimer</a>
             </footer>

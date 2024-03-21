@@ -16,8 +16,8 @@ public class Article {
     @Column(columnDefinition = "TEXT", name = "content")
     private String content;
     @ManyToOne
-    @JoinColumn(nullable = false, name = "user_id")
-    private User author;
+    @JoinColumn(nullable = false)
+    private User user;
     @Column(nullable = false, name = "creation_date")
     private LocalDateTime creationDate;
 
@@ -49,12 +49,12 @@ public class Article {
         this.content = content;
     }
 
-    public User getAuthor() {
-        return author;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setUser(User author) {
+        this.user = author;
     }
 
     public LocalDateTime getCreationDate() {
@@ -71,7 +71,7 @@ public class Article {
                 "id='" + id + '\'' +
                 "title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", author=" + author +
+                ", author=" + user +
                 ", dateTime=" + creationDate +
                 '}';
     }

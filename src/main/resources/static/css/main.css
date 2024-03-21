@@ -38,6 +38,9 @@ header {
 
 header nav ul {
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
 header nav ul li a {

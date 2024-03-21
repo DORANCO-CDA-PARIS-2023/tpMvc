@@ -50,7 +50,7 @@ public class ArticleController {
         }
 
         User user = (User) session.getAttribute("login");
-        article.setAuthor(user);
+        article.setUser(user);
 
         this.articleService.addArticle(article);
         return new RedirectView("/article");
