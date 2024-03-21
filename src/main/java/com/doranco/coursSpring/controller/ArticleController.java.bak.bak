@@ -1,16 +1,18 @@
 package com.doranco.coursSpring.controller;
 
+<<<<<<< HEAD
+=======
 import com.doranco.coursSpring.model.entity.Article;
+import com.doranco.coursSpring.model.entity.User;
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
 import com.doranco.coursSpring.model.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class ArticleController {
@@ -23,22 +25,42 @@ public class ArticleController {
     }
 
 
+<<<<<<< HEAD
     @GetMapping("/")
     public RedirectView home() {
         return new RedirectView("/article");
     }
 
     @GetMapping("/article")
+=======
+    @GetMapping("/show")
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
     public String listArticles(Model model) {
         var articles = this.articleService.getArticles();
         model.addAttribute("articles", articles);
         return "index";
     }
 
+<<<<<<< HEAD
     @PostMapping("/article")
     public String addArticle() {
         return "index";
+=======
+    @PostMapping("/addarticle")
+    public RedirectView addArticle(@ModelAttribute Article article) {
+
+        articleService.addArticle(article);
+        return new RedirectView("/article");
+>>>>>>> 3d3f8ec6fe9cf453a44ab72c26eb9c193bee84f9
     }
+
+    @GetMapping("/signup")
+    public String showSignUpForm(Model model) {
+        User  user=new User();
+         model.addAttribute(user);
+        return "add-user";
+    }
+
 
     @GetMapping("/article/{id}")
     public String getArticle(@PathVariable int id, Model model) {
