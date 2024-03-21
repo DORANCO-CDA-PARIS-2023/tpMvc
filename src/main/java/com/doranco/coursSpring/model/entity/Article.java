@@ -2,13 +2,35 @@ package com.doranco.coursSpring.model.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "article")
 public class Article {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+	
+	@Column(name = "title")
     private String title;
+	
+	@Column(name = "content")
     private String content;
+	
+	@ManyToOne
+//	@Column(name = "author")
     private User author;
 
+	@Column(name = "date_time")
     private LocalDateTime dateTime;
 
     public Article() {

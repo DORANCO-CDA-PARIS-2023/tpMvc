@@ -2,20 +2,43 @@ package com.doranco.coursSpring.model.entity;
 
 import com.doranco.coursSpring.enums.UserRoles;
 
+//import com.doranco.coursSpring.enums.UserRoles;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
+
+	@Column(name = "last_name")
 	private String lastName;
+
+	@Column(name = "first_name")
 	private String firstName;
+
+	@Column(name = "user_name")
 	private String userName;
+
+	@Column(name = "password")
 	private String password;
+
+	@Column(name = "email")
 	private String email;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role")
 	private UserRoles role;
 
 	public User() {
 	}
 
-	public User(int id, String lastName, String firstName, String userName, String password, String email, UserRoles role) {
+	public User(int id, String lastName, String firstName, String userName, String password, String email,
+			UserRoles role) {
 		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -26,7 +49,6 @@ public class User {
 	}
 
 	public User(String lastName, String firstName, String userName, String password, String email, UserRoles role) {
-		super();
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.userName = userName;
@@ -82,19 +104,19 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public UserRoles getRole() {
 		return role;
 	}
-	
+
 	public void setRole(UserRoles role) {
 		this.role = role;
 	}
 
 	@Override
 	public String toString() {
-		return "User [lastName=" + lastName + ", firstName=" + firstName + ", userName=" + userName + ", email=" + email + ", role=" + role
-				+ "]";
+		return "User [lastName=" + lastName + ", firstName=" + firstName + ", userName=" + userName + ", email=" + email
+				+ ", role=" + role + "]";
 	}
 
 }
