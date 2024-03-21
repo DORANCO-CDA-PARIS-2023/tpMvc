@@ -1,6 +1,5 @@
 package com.doranco.coursSpring.controller.api;
 
-import com.doranco.coursSpring.controller.exception.NotFoundException;
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.repository.ArticleRepository;

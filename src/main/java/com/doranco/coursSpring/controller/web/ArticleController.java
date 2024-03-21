@@ -5,6 +5,7 @@ import com.doranco.coursSpring.controller.exception.UnauthorizedException;
 import com.doranco.coursSpring.model.entity.Article;
 import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.service.ArticleService;
+import com.doranco.coursSpring.repository.ArticleRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 
@@ -19,10 +20,12 @@ import java.util.Optional;
 public class ArticleController {
 
     private final ArticleService articleService;
+    private final ArticleRepository articleRepository;
 
-    public ArticleController(ArticleService articleService)
+    public ArticleController(ArticleService articleService, ArticleRepository articleRepository)
     {
         this.articleService = articleService;
+        this.articleRepository = articleRepository;
     }
 
     @GetMapping("/article")
@@ -92,14 +95,15 @@ public class ArticleController {
     }
 
     @PostMapping("/article/{id}/modify")
-    public RedirectView modifyArticle(@ModelAttribute Article article) {
-        Optional<Article> serviceArticle = this.articleService.getArticle(article.getId());
-        if (serviceArticle.isPresent()) {
-            serviceArticle.get().setTitle(article.getTitle());
-            serviceArticle.get().setContent(article.getContent());
+    public RedirectView modifyArticle(@ModelAttribute Article modelArticle) {
+        Optional<Article> article = this.articleService.getArticle(modelArticle.getId());
+        if (article.isPresent()) {
+            article.get().setTitle(modelArticle.getTitle());
+            article.get().setContent(modelArticle.getContent());
+            articleRepository.save(article.get());
         }
 
-        return new RedirectView("/article/" + article.getId());
+        return new RedirectView("/article/" + modelArticle.getId());
     }
 
     @GetMapping("/article/{id}/modify")
