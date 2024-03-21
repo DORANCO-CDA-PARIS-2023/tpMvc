@@ -1,8 +1,5 @@
 package com.doranco.coursSpring.controller;
 
-import com.doranco.coursSpring.exception.ConflictException;
-import com.doranco.coursSpring.exception.NotFoundException;
-import com.doranco.coursSpring.exception.UnauthorizedException;
 import com.doranco.coursSpring.model.entity.User;
 import com.doranco.coursSpring.model.exception.AlreadyRegisteredException;
 import com.doranco.coursSpring.model.exception.IncompleteFormException;
@@ -11,7 +8,6 @@ import com.doranco.coursSpring.model.exception.MissMatchPasswordException;
 import com.doranco.coursSpring.model.form.LoginForm;
 import com.doranco.coursSpring.model.form.RegisterForm;
 import com.doranco.coursSpring.model.service.AuthService;
-import com.doranco.coursSpring.model.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
-
-import java.util.Optional;
 
 @Controller
 public class AuthController {
@@ -44,7 +38,7 @@ public class AuthController {
             model.addAttribute("error", e.getMessage());
         }
 
-        return "register";
+        return "auth/register";
     }
 
     @PostMapping("/login")
@@ -61,7 +55,7 @@ public class AuthController {
             model.addAttribute("error", e.getMessage());
         }
 
-        return "login";
+        return "auth/login";
     }
 
     @GetMapping("/logout")
@@ -73,13 +67,13 @@ public class AuthController {
     @GetMapping("/login")
     public String getUserLogin(Model model, HttpSession session) {
         model.addAttribute("login", session.getAttribute("login"));
-        return "login";
+        return "auth/login";
     }
 
     @GetMapping("/register")
     public String getuserRegister(Model model, HttpSession session) {
         model.addAttribute("login", session.getAttribute("login"));
-        return "register";
+        return "auth/register";
     }
 
 }
