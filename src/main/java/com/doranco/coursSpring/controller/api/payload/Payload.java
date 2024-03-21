@@ -15,12 +15,13 @@ public class Payload {
     }
 
     public Payload(String message, Object content) {
+        this();
         this.content = content;
         this.message = message;
-        this.dateTime = LocalDateTime.now();
     }
 
     public Payload(String message) {
+        this();
         this.message = message;
         this.dateTime = LocalDateTime.now();
     }
