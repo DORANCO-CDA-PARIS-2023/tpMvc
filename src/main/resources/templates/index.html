@@ -9,9 +9,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href="/article" th:href="@{/article}">Accueil</a></li>
-                <li th:unless="${session.currentUser != null}"><a href="/login" th:href="@{/login}">Connexion</a></li>
-                <li th:unless="${session.currentUser != null}"><a href="/register" th:href="@{/register}">Inscription</a></li>
+                <li><a>Home</a></li>
             </ul>
             <div th:if="${session.currentUser != null}" style="float: right;">
                 <span th:text="${session.currentUser.firstName}">Prénom</span>
@@ -20,6 +18,10 @@
         </nav>
     </header>
     <main>
+
+        <div th:text="${#ctx.session.size()}">
+        </div>
+
         <section>
             <!-- ALL ARTICLE LIST -->
             <div>

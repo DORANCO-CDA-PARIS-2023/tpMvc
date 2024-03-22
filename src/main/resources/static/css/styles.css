@@ -22,26 +22,8 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
-    padding: 0;
 }
 
-nav ul li {
-    margin: 0 10px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #B3D4FC;
-}
-
-nav div {
-    color: white;
-}
 
 main {
     width: 80%;
@@ -70,26 +52,4 @@ main section div article:hover {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-}
-
-input,
-textarea {
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-}
-
-button {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #218838;
 }

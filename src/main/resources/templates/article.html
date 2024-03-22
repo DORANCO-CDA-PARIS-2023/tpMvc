@@ -7,14 +7,8 @@
 
 </head>
 <body>
-    <h1 th:text="${article.title}">Titre de l'article</h1>
-    <p th:text="${article.content}">Contenu de l'article</p>
-    <div>
-        <h2>Information:</h2>
-        <p><strong>Prénom:</strong> <span th:text="${article.author.firstName}">Prénom de l'auteur</span></p>
-        <p><strong>Nom:</strong> <span th:text="${article.author.lastName}">Nom de l'auteur</span></p>
-        <p><strong>Email:</strong> <span th:text="${article.author.email}">Email de l'auteur</span></p>
-    </div>
-    <a th:href="@{'/article/' + ${article.id} + '/delete'}">Supprimer</a>
+    <h1 th:text="${article.title}" >Titre de l'artice</h1>
+    <p th:text="${article.content}">Contenue de l'article ...</p>
+    <a th:href="@{'/article/' + ${article.id} + '/delete'}" >supprimer</a>
 </body>
 </html>
