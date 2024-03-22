@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Article</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h1 th:text="${article.title}" >Titre de l'artice</h1>
-<p th:text="${article.content}">Contenue de l'article ...</p>
-<a th:href="@{'/article/' + ${article.id} + '/delete'}" >supprimer</a>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/article">Article</a></li>
+            <li th:if="${#ctx.session.get('user') == null}"><a href="/login">Connection</a></li>
+            <li th:if="${#ctx.session.get('user') == null}"><a href="/register">register</a></li>
+            <li th:if="${#ctx.session.get('user') != null}"><a href="/logout">logout</a></li>
+
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1 th:text="${article.title}" >Titre de l'artice</h1>
+    <p th:text="${article.content}">Contenue de l'article ...</p>
+    <a th:href="@{'/article/' + ${article.id} + '/delete'}" >supprimer</a>
+</main>
 </body>
 </html>

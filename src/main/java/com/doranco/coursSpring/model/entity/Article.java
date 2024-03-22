@@ -1,12 +1,19 @@
 package com.doranco.coursSpring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+@Entity @Table
 public class Article {
 
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String title;
     private String content;
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
     private LocalDateTime dateTime;
@@ -15,8 +22,7 @@ public class Article {
         this.dateTime = LocalDateTime.now();
     }
 
-    public Article(int id, String title, String content, User author) {
-        this.id = id;
+    public Article(String title, String content, User author) {
         this.title = title;
         this.content = content;
         this.author = author;

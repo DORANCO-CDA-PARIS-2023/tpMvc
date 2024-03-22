@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/article">Article</a></li>
+            <li th:if="${#ctx.session.get('user') == null}"><a href="/login">Connection</a></li>
+            <li  th:if="${#ctx.session.get('user') == null}"><a href="/register">Inscription</a></li>
+            <li th:if="${#ctx.session.get('user') != null}"><a href="/logout">logout</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Register</h1>
+    <div class="formMessage error" th:if="${error != null}" th:text="${error}"></div>
+    <div class="formMessage success" th:if="${success != null}" th:text="${success}"></div>
+
+ <div>
+     <form action="/register" method="post">
+
+             <label for="firstName">firstName</label>
+             <input required id="firstName" name="firstName" type="text">
+
+             <label for="lastName">lastName</label>
+             <input required id="lastName" name="lastName" type="text">
+
+             <label for="email">email</label>
+             <input required id="email" name="email" type="email">
+
+             <label for="password">password</label>
+             <input required id="password" name="password" type="password">
+
+             <label for="cpassword">confirm password</label>
+             <input required id="cpassword" name="cpassword" type="password">
+
+              <button type="submit">register</button>
+     </form>
+ </div>
+</main>
+
+
+</body>
+</html>

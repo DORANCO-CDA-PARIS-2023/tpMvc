@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Article</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/article">Article</a></li>
+            <li th:if="${#ctx.session.get('user') == null}"><a href="/login">Connection</a></li>
+            <li th:if="${#ctx.session.get('user') == null}"><a href="/register">register</a></li>
+            <li th:if="${#ctx.session.get('user') != null}"><a href="/logout">logout</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <!-- ALL ARTICLE LIST -->
+        <div>
+            <article th:each="article: ${articles}">
+                <h2 th:text="${article.title}">Title article</h2>
+                <a th:href="@{'/article/' + ${article.id} }">Link to article</a>
+            </article>
+        </div>
+    </section>
+
+
+    <section>
+        <!-- ADD ARTICLE  -->
+        <form method="post" action="/article">
+            <div>
+                <label for="title">Title</label>
+                <input id="title" type="text" name="title">
+            </div>
+            <div>
+                <label for="content">content</label>
+                <textarea id="content" name="content"></textarea>
+            </div>
+            <button type="submit">ajouter</button>
+        </form>
+    </section>
+</main>
+
+</body>
+</html>

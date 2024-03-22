@@ -10,15 +10,31 @@ h1 {
 
 nav {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    height: 60px;
-    background-color: lightblue;
+    padding:40px;
+    background-color: pink;
     color: whitesmoke;
 }
 
 nav ul {
     list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 30px;
+}
+nav ul li a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+section h1{
+
+    background-color: url("../");
 }
 
 
@@ -41,4 +57,59 @@ main section div article {
 form {
     display: flex;
     flex-direction: column;
+    padding-top: 30px
+}
+
+.formMessage {
+    color: whitesmoke;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.error {
+    background-color: darkred;
+}
+
+.success {
+    background-color: green;
+}
+input[type=email], input[type=password],
+ input[type=text] {
+         width: 100%;
+         padding: 12px 20px;
+         margin: 8px 0;
+         display: inline-block;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         box-sizing: border-box;
+}
+
+
+input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+}
+
+input[type=submit]:hover {
+          background-color: #45a049;
+}
+
+ div {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+}
+h1 {
+        padding-top: 5rem;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
 }
