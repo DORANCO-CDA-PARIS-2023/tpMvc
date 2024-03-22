@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-@RestController()
+@RestController
+@RequestMapping("/api")
 public class ArticleApiController {
 
     private final ArticleRepository articleRepository;
@@ -24,7 +25,7 @@ public class ArticleApiController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/api/article")
+    @GetMapping("/article")
     public ResponseEntity<Payload> getAll() {
         Payload payload = new Payload();
 
@@ -47,7 +48,7 @@ public class ArticleApiController {
         return new ResponseEntity<>(payload, HttpStatus.OK);
     }
 
-    @GetMapping("/api/article/{id}")
+    @GetMapping("/article/{id}")
     public ResponseEntity<Payload> getById(@PathVariable int id) {
         Payload payload = new Payload();
         try {
@@ -63,7 +64,7 @@ public class ArticleApiController {
         return new ResponseEntity<>(payload, HttpStatus.OK);
     }
 
-    @PostMapping("/api/article")
+    @PostMapping("/article")
     public ResponseEntity<Payload> add(@RequestBody Article bodyArticle) {
         Payload payload = new Payload();
 
@@ -99,7 +100,7 @@ public class ArticleApiController {
     }
 
 
-    @PutMapping("/api/article/{id}")
+    @PutMapping("/article/{id}")
     public ResponseEntity<Payload> update(@PathVariable int id, Article formArticle) {
         Payload payload = new Payload();
 
@@ -121,7 +122,7 @@ public class ArticleApiController {
         }
     }
 
-    @DeleteMapping("/api/article/{id}")
+    @DeleteMapping("/article/{id}")
     public ResponseEntity<Payload> deleteById(int id) {
         Payload payload = new Payload();
 
